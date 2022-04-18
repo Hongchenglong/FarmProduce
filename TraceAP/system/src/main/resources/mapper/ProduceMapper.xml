@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.ecnu.trace.mapper.ProduceMapper">
+
+  <resultMap id="ProduceMap" type="cn.ecnu.trace.pojo.Produce">
+      <id property="id" column="id"/>
+      <result property="name" column="name"/>
+      <result property="greenhouseId" column="greenhouse_id"/>
+      <result property="intermediateStage" column="intermediate_stage"/>
+      <result property="finishedStage" column="finished_stage"/>
+      <result property="originalStage" column="original_stage"/>
+      <result property="image" column="image"/>
+      <result property="createTime" column="create_time"/>
+      <result property="updateTime" column="update_time"/>
+  </resultMap>
+
+    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Produce">
+        update produce
+        <set>
+            <if test="name != null">
+                name = #{name}, 
+            </if>
+            <if test="greenhouseId != null">
+                greenhouse_id = #{greenhouseId}, 
+            </if>
+            <if test="intermediateStage != null">
+                intermediate_stage = #{intermediateStage}, 
+            </if>
+            <if test="finishedStage != null">
+                finished_stage = #{finishedStage}, 
+            </if>
+            <if test="originalStage != null">
+                original_stage = #{originalStage}, 
+            </if>
+            <if test="image != null">
+                image = #{image}, 
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime}, 
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where   id = #{id}
+    </update>
+</mapper>

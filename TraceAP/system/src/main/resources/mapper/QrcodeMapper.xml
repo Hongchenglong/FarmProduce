@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.ecnu.trace.mapper.QrcodeMapper">
+
+  <resultMap id="QrcodeMap" type="cn.ecnu.trace.pojo.Qrcode">
+      <result property="id" column="id"/>
+      <result property="qrcode" column="qrcode"/>
+      <result property="createTime" column="create_time"/>
+      <result property="updateTiime" column="update_tiime"/>
+  </resultMap>
+
+    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Qrcode">
+        update qrcode
+        <set>
+            <if test="id != null">
+                id = #{id}, 
+            </if>
+            <if test="qrcode != null">
+                qrcode = #{qrcode}, 
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime}, 
+            </if>
+            <if test="updateTiime != null">
+                update_tiime = #{updateTiime}
+            </if>
+        </set>
+        where   id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.ecnu.trace.mapper.EnvironmentThresholdMapper">
+
+  <resultMap id="EnvironmentThresholdMap" type="cn.ecnu.trace.pojo.EnvironmentThreshold">
+      <result property="id" column="id"/>
+      <result property="airTempMax" column="air_temp_max"/>
+      <result property="airTempMin" column="air_temp_min"/>
+      <result property="airHumMax" column="air_hum_max"/>
+      <result property="airHumMin" column="air_hum_min"/>
+      <result property="CO2Max" column="CO2_max"/>
+      <result property="CO2Min" column="CO2_min"/>
+      <result property="illuminanceMax" column="illuminance_max"/>
+      <result property="illuminanceMin" column="illuminance_min"/>
+      <result property="soilTempMax" column="soil_temp_max"/>
+      <result property="soilTempMin" column="soil_temp_min"/>
+      <result property="greenhouseId" column="greenhouse_id"/>
+      <result property="createTime" column="create_time"/>
+      <result property="updateTime" column="update_time"/>
+  </resultMap>
+
+    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.EnvironmentThreshold">
+        update environment_threshold
+        <set>
+            <if test="id != null">
+                id = #{id}, 
+            </if>
+            <if test="airTempMax != null">
+                air_temp_max = #{airTempMax}, 
+            </if>
+            <if test="airTempMin != null">
+                air_temp_min = #{airTempMin}, 
+            </if>
+            <if test="airHumMax != null">
+                air_hum_max = #{airHumMax}, 
+            </if>
+            <if test="airHumMin != null">
+                air_hum_min = #{airHumMin}, 
+            </if>
+            <if test="CO2Max != null">
+                CO2_max = #{CO2Max}, 
+            </if>
+            <if test="CO2Min != null">
+                CO2_min = #{CO2Min}, 
+            </if>
+            <if test="illuminanceMax != null">
+                illuminance_max = #{illuminanceMax}, 
+            </if>
+            <if test="illuminanceMin != null">
+                illuminance_min = #{illuminanceMin}, 
+            </if>
+            <if test="soilTempMax != null">
+                soil_temp_max = #{soilTempMax}, 
+            </if>
+            <if test="soilTempMin != null">
+                soil_temp_min = #{soilTempMin}, 
+            </if>
+            <if test="greenhouseId != null">
+                greenhouse_id = #{greenhouseId}, 
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime}, 
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where   id = #{id}
+    </update>
+</mapper>
