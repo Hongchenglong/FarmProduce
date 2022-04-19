@@ -1,14 +1,11 @@
 package com.lqjai.code.build;
 
 import com.lqjai.code.swagger.*;
-import com.lqjai.code.util.*;
-import com.lqjai.code.build.PojoBuilder;
 import com.lqjai.code.util.JavaTypes;
 import com.lqjai.code.util.ModelInfo;
 import com.lqjai.code.util.StringUtils;
 
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
 
@@ -107,7 +104,7 @@ public class TemplateBuilder {
     /***
      * 模板构建
      */
-    public static void builder(String tName){
+    public static void builder(String tName, String prefix){
         try {
             //获取数据库连接
             Connection conn = DriverManager.getConnection(props.getProperty("url"),props.getProperty("uname"),props.getProperty("pwd"));
@@ -132,10 +129,10 @@ public class TemplateBuilder {
                 if(StringUtils.isBlank(tName)){
                     //循环所有表信息
                     while (tableResultSet.next()){
-                        handleAllTable(metaData, database, tableResultSet, swaggerModels, swaggerPathList);
+                        handleAllTable(metaData, database, tableResultSet, swaggerModels, swaggerPathList, prefix);
                     }
                 }else { //处理单张表
-                    handleSingleTable(tName, metaData, database, swaggerModels, swaggerPathList);
+                    handleSingleTable(tName, metaData, database, swaggerModels, swaggerPathList, prefix);
                 }
 
                 //构建Swagger文档数据-JSON数据
@@ -150,11 +147,11 @@ public class TemplateBuilder {
         }
     }
 
-    private static void handleSingleTable(String tName, DatabaseMetaData metaData, String database, List<SwaggerModel> swaggerModels, List<SwaggerPath> swaggerPathList) throws SQLException {
+    private static void handleSingleTable(String tName, DatabaseMetaData metaData, String database, List<SwaggerModel> swaggerModels, List<SwaggerPath> swaggerPathList, String prefix) throws SQLException {
         //获取表名
         String tableName= tName;
         //名字操作,去掉tab_,tb_，去掉_并转驼峰
-        String table = StringUtils.replace_(StringUtils.replaceTab(tableName));
+        String table = StringUtils.replace_(StringUtils.replaceTab(tableName, prefix));
         //大写对象
         String Table =StringUtils.firstUpper(table);
 
@@ -268,11 +265,11 @@ public class TemplateBuilder {
         swaggerPathList.addAll(swaggerMethodInit(Table,table,StringUtils.firstLower(keyType),format));
     }
 
-    private static void handleAllTable(DatabaseMetaData metaData, String database, ResultSet tableResultSet, List<SwaggerModel> swaggerModels, List<SwaggerPath> swaggerPathList) throws SQLException {
+    private static void handleAllTable(DatabaseMetaData metaData, String database, ResultSet tableResultSet, List<SwaggerModel> swaggerModels, List<SwaggerPath> swaggerPathList, String prefix) throws SQLException {
         //获取表名
         String tableName=tableResultSet.getString("TABLE_NAME");
         //名字操作,去掉tab_,tb_，去掉_并转驼峰
-        String table = StringUtils.replace_(StringUtils.replaceTab(tableName));
+        String table = StringUtils.replace_(StringUtils.replaceTab(tableName, prefix));
         //大写对象
         String Table =StringUtils.firstUpper(table);
 

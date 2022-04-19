@@ -39,8 +39,10 @@ public class StringUtils {
      * 移除tab_,tb_
      * @return
      */
-    public static String replaceTab(String str){
-        return str.replaceFirst("tab_","").replaceFirst("tb_","");
+    public static String replaceTab(String str, String prefix){
+        if(StringUtils.isNotBlank(prefix))
+            return str.replaceFirst(prefix,"");
+        return str;
     }
 
     /***
