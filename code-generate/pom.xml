@@ -10,7 +10,7 @@
     <description>代码生成器</description>
 
     <parent>
-        <artifactId>TraceAP</artifactId>
+        <artifactId>FarmProduce</artifactId>
         <groupId>cn.ecnu.trace</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
