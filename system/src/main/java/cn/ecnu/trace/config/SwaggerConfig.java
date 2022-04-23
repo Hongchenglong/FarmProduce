@@ -11,6 +11,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
+/**
+ * http://127.0.0.1:8088/swagger-ui/index.html
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
