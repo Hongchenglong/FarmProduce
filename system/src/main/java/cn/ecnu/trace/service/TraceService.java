@@ -1,7 +1,9 @@
 package cn.ecnu.trace.service;
 
 import cn.ecnu.trace.common.utils.PageResult;
+import cn.ecnu.trace.common.utils.R;
 import cn.ecnu.trace.pojo.Trace;
+import cn.ecnu.trace.vo.TraceQueryVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -44,5 +46,10 @@ public interface TraceService extends IService<Trace> {
      * @param trace
      */
     public Boolean updateLogicDelById(Trace trace);
+
+    /**
+     * 根据时间间隔查找
+     */
+    R findByInterval(TraceQueryVO vo);
 
 }

@@ -4,6 +4,7 @@ import cn.ecnu.trace.common.utils.PageResult;
 import cn.ecnu.trace.common.utils.R;
 import cn.ecnu.trace.pojo.Trace;
 import cn.ecnu.trace.service.TraceService;
+import cn.ecnu.trace.vo.TraceQueryVO;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -112,5 +113,11 @@ public class TraceController {
     public R<List<Trace>> findAll() {
         //调用TraceService实现查询所有Trace
         return R.ok(traceService.list(Wrappers.<Trace>lambdaQuery().orderByDesc(Trace::getCreateTime)));
+    }
+
+    @ApiOperation("根据时间间隔查找")
+    @PostMapping("/findByInterval")
+    public R findByInterval(@RequestBody TraceQueryVO vo) {
+        return traceService.findByInterval(vo);
     }
 }

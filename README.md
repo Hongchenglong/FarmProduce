@@ -2,7 +2,7 @@
 
 ## 开发环境
 
-参考：http://www.oeong.com:8080/ncpsy
+参考：http://www.oeong.com:8080/ncpsy 账号123密码456
 
 swagger文档：http://www.oeong.com:8088/swagger-ui/index.html
 
