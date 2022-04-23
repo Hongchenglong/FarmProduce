@@ -95,7 +95,7 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
 
     public R findByInterval(TraceQueryVO vo) {
         LocalDate startDate = vo.getStartDate();
-        LocalDate endDate = vo.getEndDate();
+        LocalDate endDate = vo.getEndDate().plusDays(1);
         if (startDate.isAfter(endDate)) {
             return R.error("开始时间不得大于结束时间");
         }
