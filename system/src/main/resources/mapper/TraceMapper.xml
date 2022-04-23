@@ -13,7 +13,7 @@
       <result property="qualityWorker" column="quality_worker"/>
       <result property="transportWorker" column="transport_worker"/>
       <result property="produceId" column="produce_id"/>
-      <result property="updateDate" column="update_date"/>
+      <result property="updateTime" column="update_time"/>
       <result property="createTime" column="create_time"/>
   </resultMap>
 
@@ -47,7 +47,7 @@
             <if test="produceId != null">
                 produce_id = #{produceId}, 
             </if>
-            <if test="updateDate != null">
+            <if test="updateTime != null">
                 update_date = #{updateDate}, 
             </if>
             <if test="createTime != null">

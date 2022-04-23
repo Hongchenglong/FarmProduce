@@ -19,7 +19,7 @@ import java.util.List;
  * @author Hongchenglong
  * @since 2022/4/23
  */
-@Api(value = "农产品管理", tags = "FarmProduceController")
+@Api(value = "农产品管理", tags = "农产品管理")
 @RestController
 @RequestMapping("/farmProduce")
 @CrossOrigin

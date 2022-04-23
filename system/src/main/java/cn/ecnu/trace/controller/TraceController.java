@@ -19,7 +19,7 @@ import java.util.List;
  * @author Hongchenglong
  * @since 2022/4/23
  */
-@Api(value = "溯源管理", tags = "TraceController")
+@Api(value = "溯源管理", tags = "溯源管理")
 @RestController
 @RequestMapping("/trace")
 @CrossOrigin

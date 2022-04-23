@@ -53,7 +53,7 @@ public class Trace implements Serializable{
 	private Integer produceId;	//农产品id
 
 	@ApiModelProperty(value = "更新时间",required = false)
-	private LocalDateTime updateDate;	//更新时间
+	private LocalDateTime updateTime;	//更新时间
 
 	@ApiModelProperty(value = "创建时间",required = false)
 	private LocalDateTime createTime;	//创建时间
