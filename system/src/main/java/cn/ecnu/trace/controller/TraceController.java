@@ -72,7 +72,7 @@ public class TraceController {
      * @return
      */
     @ApiOperation("Trace根据ID修改")
-    @PutMapping
+    @PutMapping("/update")
     public R update(@RequestBody @ApiParam(name = "Trace对象", value = "传入JSON数据", required = false) Trace trace) {
         //调用TraceService实现修改Trace
         return R.ok(traceService.updateById(trace));
@@ -84,7 +84,7 @@ public class TraceController {
      * @return
      */
     @ApiOperation("Trace添加")
-    @PostMapping
+    @PostMapping("/add")
     public R add(@RequestBody @ApiParam(name = "Trace对象", value = "传入JSON数据", required = true) Trace trace) {
         //调用TraceService实现添加Trace
         return R.ok(traceService.save(trace));
@@ -108,7 +108,7 @@ public class TraceController {
      * @return
      */
     @ApiOperation("查询所有Trace")
-    @GetMapping
+    @GetMapping("/findAll")
     public R<List<Trace>> findAll() {
         //调用TraceService实现查询所有Trace
         return R.ok(traceService.list(Wrappers.<Trace>lambdaQuery().orderByDesc(Trace::getCreateTime)));
