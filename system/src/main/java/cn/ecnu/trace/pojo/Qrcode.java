@@ -35,6 +35,6 @@ public class Qrcode implements Serializable{
 	private LocalDateTime createTime;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private LocalDateTime updateTiime;	//
+	private LocalDateTime updateTime;	//
 
 }

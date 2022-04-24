@@ -13,7 +13,7 @@ public class CodeApplication {
         /**
          * tableName 为空或者null生成所有表的代码，否则生成指定表的代码
          */
-        String tableName = "farm_produce";
+        String tableName = "trace";
         String prefix = ""; //去除表的前缀，为""则不去除,例 "tb_", "t_" ...
         //调用该方法即可
         TemplateBuilder.builder(tableName, prefix);

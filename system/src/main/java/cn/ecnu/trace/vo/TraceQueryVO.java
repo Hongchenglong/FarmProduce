@@ -2,7 +2,6 @@ package cn.ecnu.trace.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -14,8 +13,8 @@ import java.time.LocalDateTime;
 public class TraceQueryVO {
 
     @ApiModelProperty(value = "开始日期", required = false)
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @ApiModelProperty(value = "结束日期", required = false)
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 }
