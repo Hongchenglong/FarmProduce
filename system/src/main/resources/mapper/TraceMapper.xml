@@ -3,57 +3,75 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.TraceMapper">
 
-  <resultMap id="TraceMap" type="cn.ecnu.trace.pojo.Trace">
-      <result property="id" column="id"/>
-      <result property="qrcode" column="qrcode"/>
-      <result property="enterpriseId" column="enterprise_id"/>
-      <result property="greenhouseId" column="greenhouse_id"/>
-      <result property="nurtureWorker" column="nurture_worker"/>
-      <result property="productWorker" column="product_worker"/>
-      <result property="qualityWorker" column="quality_worker"/>
-      <result property="transportWorker" column="transport_worker"/>
-      <result property="produceId" column="produce_id"/>
-      <result property="updateTime" column="update_time"/>
-      <result property="createTime" column="create_time"/>
-  </resultMap>
+    <resultMap id="TraceMap" type="cn.ecnu.trace.pojo.Trace">
+        <result property="id" column="id"/>
+        <result property="qrcode" column="qrcode"/>
+        <result property="enterpriseId" column="enterprise_id"/>
+        <result property="greenhouseId" column="greenhouse_id"/>
+        <result property="nurtureWorker" column="nurture_worker"/>
+        <result property="productWorker" column="product_worker"/>
+        <result property="qualityWorker" column="quality_worker"/>
+        <result property="transportWorker" column="transport_worker"/>
+        <result property="produceId" column="produce_id"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="produceName" column="product_name"/>
+<!--        <association property="farmProduce" javaType="cn.ecnu.trace.pojo.FarmProduce">-->
+<!--            <id property="id" column="id"/>-->
+<!--            <result property="name" column="name"/>-->
+<!--            <result property="greenhouseId" column="greenhouse_id"/>-->
+<!--            <result property="intermediateStage" column="intermediate_stage"/>-->
+<!--            <result property="finishedStage" column="finished_stage"/>-->
+<!--            <result property="originalStage" column="original_stage"/>-->
+<!--            <result property="image" column="image"/>-->
+<!--            <result property="createTime" column="create_time"/>-->
+<!--            <result property="updateTime" column="update_time"/>-->
+<!--        </association>-->
+    </resultMap>
 
     <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Trace">
         update trace
         <set>
             <if test="id != null">
-                id = #{id}, 
+                id = #{id},
             </if>
             <if test="qrcode != null">
-                qrcode = #{qrcode}, 
+                qrcode = #{qrcode},
             </if>
             <if test="enterpriseId != null">
-                enterprise_id = #{enterpriseId}, 
+                enterprise_id = #{enterpriseId},
             </if>
             <if test="greenhouseId != null">
-                greenhouse_id = #{greenhouseId}, 
+                greenhouse_id = #{greenhouseId},
             </if>
             <if test="nurtureWorker != null">
-                nurture_worker = #{nurtureWorker}, 
+                nurture_worker = #{nurtureWorker},
             </if>
             <if test="productWorker != null">
-                product_worker = #{productWorker}, 
+                product_worker = #{productWorker},
             </if>
             <if test="qualityWorker != null">
-                quality_worker = #{qualityWorker}, 
+                quality_worker = #{qualityWorker},
             </if>
             <if test="transportWorker != null">
-                transport_worker = #{transportWorker}, 
+                transport_worker = #{transportWorker},
             </if>
             <if test="produceId != null">
-                produce_id = #{produceId}, 
+                produce_id = #{produceId},
             </if>
             <if test="updateTime != null">
-                update_date = #{updateDate}, 
+                update_date = #{updateDate},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime}
             </if>
         </set>
-        where   id = #{id}
+        where id = #{id}
     </update>
+
+    <select id="selectTraceMap" resultMap="TraceMap">
+        select t.id, t.qrcode, t.produce_id, f.name product_name, t.enterprise_id, t.greenhouse_id, t.nurture_worker, t.product_worker, t.quality_worker, t.transport_worker, t.update_time, t.create_time
+        from trace t left join farm_produce f on t.produce_id = f.id order by t.id
+    </select>
+
 </mapper>

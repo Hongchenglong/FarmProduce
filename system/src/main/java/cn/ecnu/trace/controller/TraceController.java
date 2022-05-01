@@ -111,8 +111,8 @@ public class TraceController {
     @ApiOperation("查询所有Trace")
     @GetMapping("/findAll")
     public R<List<Trace>> findAll() {
-        //调用TraceService实现查询所有Trace
-        return R.ok(traceService.list(Wrappers.<Trace>lambdaQuery().orderByDesc(Trace::getCreateTime)));
+        // 调用TraceService实现查询所有Trace
+        return R.ok(traceService.selectTraceMap());
     }
 
     @ApiOperation("根据时间间隔查找")

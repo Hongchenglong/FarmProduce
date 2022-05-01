@@ -52,4 +52,6 @@ public interface TraceService extends IService<Trace> {
      */
     R findByInterval(TraceQueryVO vo);
 
+    List<Trace> selectTraceMap();
+
 }

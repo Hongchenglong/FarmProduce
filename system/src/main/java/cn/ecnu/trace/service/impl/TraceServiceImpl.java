@@ -22,11 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/****
- * @Author: Kili
- * @Description: TraceServiceImpl
- * @Date 2022-04-18 21:25:40
- *****/
 @Service
 @Slf4j
 public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements TraceService{
@@ -109,6 +104,11 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
             startDate = startDate.plusDays(1);
         }
         return R.ok(map);
+    }
+
+    @Override
+    public List<Trace> selectTraceMap() {
+        return baseMapper.selectTraceMap();
     }
 
 }

@@ -1,5 +1,7 @@
 package cn.ecnu.trace.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /****
  * @Author: Kili
@@ -26,6 +29,7 @@ import java.time.LocalDateTime;
 public class Trace implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	@TableId(type = IdType.AUTO)
 	@ApiModelProperty(value = "",required = false)
 	private Long id;	//
 
@@ -59,4 +63,8 @@ public class Trace implements Serializable{
 	@ApiModelProperty(value = "创建时间",required = false)
 	private LocalDateTime createTime;	//创建时间
 
+	// private FarmProduce farmProduce;
+
+	@ApiModelProperty("农产品名称")
+	private String produceName;
 }
