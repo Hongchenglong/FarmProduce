@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.ecnu.trace.mapper.ProduceMapper">
+<mapper namespace="cn.ecnu.trace.mapper.FarmProduceMapper">
 
-  <resultMap id="ProduceMap" type="cn.ecnu.trace.pojo.Produce">
+  <resultMap id="FarmProduceMap" type="cn.ecnu.trace.pojo.FarmProduce">
       <id property="id" column="id"/>
       <result property="name" column="name"/>
       <result property="greenhouseId" column="greenhouse_id"/>
@@ -15,8 +15,8 @@
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Produce">
-        update produce
+    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.FarmProduce">
+        update farm_produce
         <set>
             <if test="name != null">
                 name = #{name}, 

@@ -7,7 +7,7 @@
       <result property="id" column="id"/>
       <result property="qrcode" column="qrcode"/>
       <result property="createTime" column="create_time"/>
-      <result property="updateTiime" column="update_tiime"/>
+      <result property="updateTime" column="update_time"/>
   </resultMap>
 
     <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Qrcode">
@@ -22,8 +22,8 @@
             <if test="createTime != null">
                 create_time = #{createTime}, 
             </if>
-            <if test="updateTiime != null">
-                update_tiime = #{updateTiime}
+            <if test="updateTime != null">
+                update_time = #{updateTime}
             </if>
         </set>
         where   id = #{id}

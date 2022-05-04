@@ -1,12 +1,18 @@
 server:
-  port: 8888
+  port: 8088
 spring:
-  application:
-    name: user
   main:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://oeong.com:3306/farm_produce?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://150.158.212.175:3306/farm_produce?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: farm_produce
     password: jLJ2sCGkyYKYzKnd
+    hikari:
+      max-lifetime: 120000
+
+  jackson:
+    time-zone: Asia/Shanghai
+    # Date返回前端转时间戳 但不能解决LocalDateTime转时间戳（JacksonCustomizerConfig类解决）
+    serialization:
+      write-dates-as-timestamps: true

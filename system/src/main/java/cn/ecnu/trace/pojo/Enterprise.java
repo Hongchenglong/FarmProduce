@@ -47,7 +47,7 @@ public class Enterprise implements Serializable{
 	private String manager;	//管理员
 
 	@ApiModelProperty(value = "电话",required = false)
-	private Integer phone;	//电话
+	private String phone;	//电话
 
 	@ApiModelProperty(value = "邮箱",required = false)
 	private String email;	//邮箱

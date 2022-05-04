@@ -47,6 +47,6 @@
                 update_time = #{updateTime}
             </if>
         </set>
-        where   id = #{id}
+        where id = #{id}
     </update>
 </mapper>

@@ -7,11 +7,6 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/****
- * @Author: Kili
- * @Description: TraceDao
- * @Date 2022-04-18 21:25:40
- *****/
 public interface TraceMapper extends BaseMapper<Trace> {
     /**
      * 根据id查询已经逻辑删除的数据
@@ -38,4 +33,5 @@ public interface TraceMapper extends BaseMapper<Trace> {
      */
     public Boolean updateLogicDelById(Trace trace);
 
+    List<Trace> selectTraceMap();
 }

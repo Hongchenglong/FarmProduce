@@ -1,10 +1,14 @@
 package cn.ecnu.trace.service.impl;
 
 import cn.ecnu.trace.common.utils.PageResult;
+import cn.ecnu.trace.common.utils.R;
 import cn.ecnu.trace.mapper.TraceMapper;
 import cn.ecnu.trace.pojo.Trace;
 import cn.ecnu.trace.service.TraceService;
+import cn.ecnu.trace.vo.TraceQueryVO;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,13 +16,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-/****
- * @Author: Kili
- * @Description: TraceServiceImpl
- * @Date 2022-04-18 21:25:40
- *****/
 @Service
 @Slf4j
 public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements TraceService{
@@ -74,7 +77,7 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
      */
     public Boolean deleteTablelogic(Long id){
         return baseMapper.deleteTablelogic(id);
-    };
+    }
 
     /**
      * 根据id更新逻辑删除的数据
@@ -83,5 +86,29 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
      */
     public Boolean updateLogicDelById(Trace trace){
         return baseMapper.updateLogicDelById(trace);
-    };
+    }
+
+    public R findByInterval(TraceQueryVO vo) {
+        LocalDate startDate = vo.getStartDate().toLocalDate();
+        LocalDate endDate = vo.getEndDate().toLocalDate().plusDays(1);
+        if (startDate.isAfter(endDate)) {
+            return R.error("开始时间不得大于结束时间");
+        }
+        HashMap<LocalDate, Long> map = new HashMap<>();
+
+        while (!startDate.isEqual(endDate)) {
+            QueryWrapper<Trace> wrapper = new QueryWrapper<>();
+            wrapper.eq("update_time", startDate);
+            Long count = baseMapper.selectCount(wrapper);
+            map.put(startDate, count);
+            startDate = startDate.plusDays(1);
+        }
+        return R.ok(map);
+    }
+
+    @Override
+    public List<Trace> selectTraceMap() {
+        return baseMapper.selectTraceMap();
+    }
+
 }

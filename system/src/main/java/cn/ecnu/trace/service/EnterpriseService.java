@@ -1,8 +1,11 @@
 package cn.ecnu.trace.service;
 
 import cn.ecnu.trace.common.utils.PageResult;
+import cn.ecnu.trace.common.utils.R;
 import cn.ecnu.trace.pojo.Enterprise;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -45,4 +48,7 @@ public interface EnterpriseService extends IService<Enterprise> {
      */
     public Boolean updateLogicDelById(Enterprise enterprise);
 
+    R<String> login(Enterprise enterprise);
+
+    R<String> register(Enterprise enterprise);
 }

@@ -1,16 +1,19 @@
 package cn.ecnu.trace.service.impl;
 
 import cn.ecnu.trace.common.utils.PageResult;
+import cn.ecnu.trace.common.utils.R;
 import cn.ecnu.trace.mapper.EnterpriseMapper;
 import cn.ecnu.trace.pojo.Enterprise;
 import cn.ecnu.trace.service.EnterpriseService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -74,7 +77,7 @@ public class EnterpriseServiceImpl extends ServiceImpl<EnterpriseMapper, Enterpr
      */
     public Boolean deleteTablelogic(Long id){
         return baseMapper.deleteTablelogic(id);
-    };
+    }
 
     /**
      * 根据id更新逻辑删除的数据
@@ -83,5 +86,28 @@ public class EnterpriseServiceImpl extends ServiceImpl<EnterpriseMapper, Enterpr
      */
     public Boolean updateLogicDelById(Enterprise enterprise){
         return baseMapper.updateLogicDelById(enterprise);
-    };
+    }
+
+    @Override
+    public R<String> login(Enterprise enterprise) {
+        QueryWrapper<Enterprise> wrapper = new QueryWrapper<>();
+        wrapper.eq("account", enterprise.getAccount()).eq("password", enterprise.getPassword());
+        if (baseMapper.selectOne(wrapper) != null) {
+            return R.ok();
+        } else {
+            return R.error("账号或密码错误~");
+        }
+    }
+
+    @Override
+    public R<String> register(Enterprise enterprise) {
+        QueryWrapper<Enterprise> wrapper = new QueryWrapper<>();
+        wrapper.eq("account", enterprise.getAccount());
+        if (baseMapper.selectOne(wrapper) == null) {
+            baseMapper.insert(enterprise);
+            return R.ok();
+        } else {
+            return R.error("账号已存在");
+        }
+    }
 }

@@ -4,6 +4,7 @@ import cn.ecnu.trace.common.utils.PageResult;
 import cn.ecnu.trace.common.utils.R;
 import cn.ecnu.trace.pojo.Trace;
 import cn.ecnu.trace.service.TraceService;
+import cn.ecnu.trace.vo.TraceQueryVO;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/****
- * @Author: Kili
- * @Description: TraceController
- * @Date 2022-04-18 21:25:40
- *****/
-@Api(value = "TraceController", tags = "TraceController")
+/**
+ * @author Hongchenglong
+ * @since 2022/4/23
+ */
+@Api(value = "溯源管理", tags = "溯源管理")
 @RestController
 @RequestMapping("/trace")
 @CrossOrigin
@@ -38,9 +38,9 @@ public class TraceController {
      * @return
      */
     @ApiOperation("Trace条件分页查询")
-    @PostMapping("/search/{pageNo}/{size}" )
-    public R<PageResult> findPage(@RequestBody(required = false) @ApiParam(name = "Trace对象",value = "传入JSON数据",required = false) Trace trace, @PathVariable  int pageNo, @PathVariable  int size){
-        return R.ok( traceService.findPage(trace, pageNo, size));
+    @PostMapping("/search/{pageNo}/{size}")
+    public R<PageResult> findPage(@RequestBody(required = false) @ApiParam(name = "Trace对象", value = "传入JSON数据", required = false) Trace trace, @PathVariable int pageNo, @PathVariable int size) {
+        return R.ok(traceService.findPage(trace, pageNo, size));
     }
 
     /***
@@ -50,9 +50,9 @@ public class TraceController {
      * @return
      */
     @ApiOperation("Trace分页查询")
-    @GetMapping("/search/{pageNo}/{size}" )
-    public R<PageResult> findPage(@PathVariable  int pageNo, @PathVariable  int size){
-        return R.ok( traceService.findPage(pageNo, size));
+    @GetMapping("/search/{pageNo}/{size}")
+    public R<PageResult> findPage(@PathVariable int pageNo, @PathVariable int size) {
+        return R.ok(traceService.findPage(pageNo, size));
     }
 
     /***
@@ -61,8 +61,8 @@ public class TraceController {
      * @return
      */
     @ApiOperation("Trace根据ID删除")
-    @DeleteMapping("/{id}" )
-    public R delete(@PathVariable  Long id){
+    @DeleteMapping("/{id}")
+    public R delete(@PathVariable Long id) {
         //调用TraceService实现根据主键删除
         return R.ok(traceService.removeById(id));
     }
@@ -73,8 +73,8 @@ public class TraceController {
      * @return
      */
     @ApiOperation("Trace根据ID修改")
-    @PutMapping
-    public R update(@RequestBody @ApiParam(name = "Trace对象",value = "传入JSON数据",required = false) Trace trace){
+    @PutMapping("/update")
+    public R update(@RequestBody @ApiParam(name = "Trace对象", value = "传入JSON数据", required = false) Trace trace) {
         //调用TraceService实现修改Trace
         return R.ok(traceService.updateById(trace));
     }
@@ -85,8 +85,8 @@ public class TraceController {
      * @return
      */
     @ApiOperation("Trace添加")
-    @PostMapping
-    public R add(@RequestBody  @ApiParam(name = "Trace对象",value = "传入JSON数据",required = true) Trace trace){
+    @PostMapping("/add")
+    public R add(@RequestBody @ApiParam(name = "Trace对象", value = "传入JSON数据", required = true) Trace trace) {
         //调用TraceService实现添加Trace
         return R.ok(traceService.save(trace));
     }
@@ -99,7 +99,7 @@ public class TraceController {
     @ApiOperation(value = "Trace根据ID查询")
     @ApiImplicitParam(paramType = "path", name = "id", value = "主键ID", required = true, dataType = "")
     @GetMapping("/{id}")
-    public R<Trace> findById(@PathVariable  Long id){
+    public R<Trace> findById(@PathVariable Long id) {
         //调用TraceService实现根据主键查询Trace
         return R.ok(traceService.getById(id));
     }
@@ -109,9 +109,15 @@ public class TraceController {
      * @return
      */
     @ApiOperation("查询所有Trace")
-    @GetMapping
-    public R<List<Trace>> findAll(){
-        //调用TraceService实现查询所有Trace
-        return R.ok(traceService.list(Wrappers.<Trace>lambdaQuery().orderByDesc(Trace::getCreateTime))) ;
+    @GetMapping("/findAll")
+    public R<List<Trace>> findAll() {
+        // 调用TraceService实现查询所有Trace
+        return R.ok(traceService.selectTraceMap());
+    }
+
+    @ApiOperation("根据时间间隔查找")
+    @PostMapping("/findByInterval")
+    public R findByInterval(@RequestBody TraceQueryVO vo) {
+        return traceService.findByInterval(vo);
     }
 }
