@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import cn.ecnu.trace.common.utils.PageResult;
+import cn.ecnu.common.utils.PageResult;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -50,39 +50,4 @@ public class ${Table}ServiceImpl extends ServiceImpl<${Table}Mapper, ${Table}> i
         PageResult pageResult=new PageResult(result.getTotal(),result.getRecords());
         return pageResult;
     }
-
-    /**
-     * 根据id查询已经逻辑删除的数据
-     * 需在配置文件设置好逻辑删除字段
-     * 并在该字段上加上 @TableLogic注解
-     */
-    @Override
-    public ${Table} findLogicDelById(Long id) {
-        return baseMapper.findLogicDelById(id);
-    }
-
-    /**
-     * 查询所有已经逻辑删除的数据
-     */
-    @Override
-    public List<${Table}> findAllLogicDel() {
-        return baseMapper.findAllLogicDel();
-    }
-
-
-    /**
-     * 根据id物理删除数据
-     */
-    public Boolean deleteTablelogic(Long id){
-        return baseMapper.deleteTablelogic(id);
-    };
-
-    /**
-     * 根据id更新逻辑删除的数据
-     * 复杂sql语句写在xml里面
-     * @param ${table}
-     */
-    public Boolean updateLogicDelById(${Table} ${table}){
-        return baseMapper.updateLogicDelById(${table});
-    };
 }

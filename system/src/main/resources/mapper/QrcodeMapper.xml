@@ -3,14 +3,14 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.QrcodeMapper">
 
-  <resultMap id="QrcodeMap" type="cn.ecnu.trace.pojo.Qrcode">
+  <resultMap id="QrcodeMap" type="cn.ecnu.system.pojo.Qrcode">
       <result property="id" column="id"/>
       <result property="qrcode" column="qrcode"/>
       <result property="createTime" column="create_time"/>
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Qrcode">
+    <update id="updateLogicDelById" parameterType="cn.ecnu.system.pojo.Qrcode">
         update qrcode
         <set>
             <if test="id != null">

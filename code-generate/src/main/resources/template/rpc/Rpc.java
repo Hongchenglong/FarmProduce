@@ -1,11 +1,11 @@
 package ${package_rpc};
 
 import ${package_pojo}.${Table};
-import cn.ecnu.trace.common.utils.PageResult;
+import cn.ecnu.common.utils.PageResult;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import java.util.List;
-import cn.ecnu.trace.common.utils.R;
+import cn.ecnu.common.utils.R;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.GreenhouseMapper">
 
-  <resultMap id="GreenhouseMap" type="cn.ecnu.trace.pojo.Greenhouse">
+  <resultMap id="GreenhouseMap" type="cn.ecnu.system.pojo.Greenhouse">
       <result property="id" column="id"/>
       <result property="name" column="name"/>
       <result property="image" column="image"/>
@@ -12,7 +12,7 @@
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Greenhouse">
+    <update id="updateLogicDelById" parameterType="cn.ecnu.system.pojo.Greenhouse">
         update greenhouse
         <set>
             <if test="id != null">

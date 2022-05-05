@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.EnvironmentThresholdMapper">
 
-  <resultMap id="EnvironmentThresholdMap" type="cn.ecnu.trace.pojo.EnvironmentThreshold">
+  <resultMap id="EnvironmentThresholdMap" type="cn.ecnu.system.pojo.EnvironmentThreshold">
       <result property="id" column="id"/>
       <result property="airTempMax" column="air_temp_max"/>
       <result property="airTempMin" column="air_temp_min"/>
@@ -20,7 +20,7 @@
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.EnvironmentThreshold">
+    <update id="updateLogicDelById" parameterType="cn.ecnu.system.pojo.EnvironmentThreshold">
         update environment_threshold
         <set>
             <if test="id != null">

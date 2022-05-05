@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.EnterpriseMapper">
 
-  <resultMap id="EnterpriseMap" type="cn.ecnu.trace.pojo.Enterprise">
+  <resultMap id="EnterpriseMap" type="cn.ecnu.system.pojo.Enterprise">
       <id property="id" column="id"/>
       <result property="account" column="account"/>
       <result property="password" column="password"/>
@@ -16,7 +16,7 @@
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Enterprise">
+    <update id="updateLogicDelById" parameterType="cn.ecnu.system.pojo.Enterprise">
         update enterprise
         <set>
             <if test="account != null">

@@ -1,7 +1,7 @@
 package ${package_feign};
 
-import cn.ecnu.trace.common.utils.PageResult;
-import cn.ecnu.trace.common.utils.R;
+import cn.ecnu.common.utils.PageResult;
+import cn.ecnu.common.utils.R;
 import ${package_pojo}.${Table};
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

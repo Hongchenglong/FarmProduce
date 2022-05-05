@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.ManagerMapper">
 
-  <resultMap id="ManagerMap" type="cn.ecnu.trace.pojo.Manager">
+  <resultMap id="ManagerMap" type="cn.ecnu.system.pojo.Manager">
       <result property="id" column="id"/>
       <result property="account" column="account"/>
       <result property="username" column="username"/>
@@ -12,7 +12,7 @@
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Manager">
+    <update id="updateLogicDelById" parameterType="cn.ecnu.system.pojo.Manager">
         update manager
         <set>
             <if test="id != null">

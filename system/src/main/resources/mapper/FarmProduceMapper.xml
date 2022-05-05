@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.FarmProduceMapper">
 
-  <resultMap id="FarmProduceMap" type="cn.ecnu.trace.pojo.FarmProduce">
+  <resultMap id="FarmProduceMap" type="cn.ecnu.system.pojo.FarmProduce">
       <id property="id" column="id"/>
       <result property="name" column="name"/>
       <result property="greenhouseId" column="greenhouse_id"/>
@@ -15,7 +15,7 @@
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.FarmProduce">
+    <update id="updateLogicDelById" parameterType="cn.ecnu.system.pojo.FarmProduce">
         update farm_produce
         <set>
             <if test="name != null">

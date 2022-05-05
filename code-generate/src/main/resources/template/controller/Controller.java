@@ -1,9 +1,9 @@
 package ${package_controller};
 
 import ${package_service}.${Table}Service;
-import cn.ecnu.trace.common.utils.PageResult;
-import cn.ecnu.trace.common.utils.R;
-import cn.ecnu.trace.common.utils.StatusCode;
+import cn.ecnu.common.utils.PageResult;
+import cn.ecnu.common.utils.R;
+import cn.ecnu.common.utils.StatusCode;
 import ${package_pojo}.${Table};
 <#if swagger==true>import io.swagger.annotations.*;</#if>
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;

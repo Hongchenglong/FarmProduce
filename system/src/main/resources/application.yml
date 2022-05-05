@@ -1,6 +1,8 @@
 server:
   port: 8088
 spring:
+  application:
+    name: system
   main:
     allow-bean-definition-overriding: true
   datasource:
@@ -16,3 +18,10 @@ spring:
     # Date返回前端转时间戳 但不能解决LocalDateTime转时间戳（JacksonCustomizerConfig类解决）
     serialization:
       write-dates-as-timestamps: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true

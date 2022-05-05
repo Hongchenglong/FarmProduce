@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.ecnu.trace.mapper.EnviromentMapper">
 
-  <resultMap id="EnviromentMap" type="cn.ecnu.trace.pojo.Enviroment">
+  <resultMap id="EnviromentMap" type="cn.ecnu.system.pojo.Enviroment">
       <id property="id" column="id"/>
       <result property="airTemperature" column="air_temperature"/>
       <result property="airHumidity" column="air_humidity"/>
@@ -17,7 +17,7 @@
       <result property="updateTime" column="update_time"/>
   </resultMap>
 
-    <update id="updateLogicDelById" parameterType="cn.ecnu.trace.pojo.Enviroment">
+    <update id="updateLogicDelById" parameterType="cn.ecnu.system.pojo.Enviroment">
         update enviroment
         <set>
             <if test="airTemperature != null">
