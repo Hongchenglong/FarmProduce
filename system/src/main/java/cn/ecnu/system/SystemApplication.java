@@ -17,9 +17,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication(exclude = {RedisAutoConfiguration.class, RabbitAutoConfiguration.class})
 @EnableEurekaClient
 @MapperScan("cn.ecnu.system.mapper")
-public class MainApplication {
+public class SystemApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MainApplication.class,args);
+        SpringApplication.run(SystemApplication.class,args);
     }
 
     @Bean

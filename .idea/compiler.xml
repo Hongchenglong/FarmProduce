@@ -9,8 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gataway" />
         <module name="system" />
-        <module name="code-generate" />
         <module name="common" />
+        <module name="code-generate" />
         <module name="Eureka" />
       </profile>
     </annotationProcessing>
