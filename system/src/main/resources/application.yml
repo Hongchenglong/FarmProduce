@@ -12,7 +12,6 @@ spring:
     password: jLJ2sCGkyYKYzKnd
     hikari:
       max-lifetime: 120000
-
   jackson:
     time-zone: Asia/Shanghai
     # Date返回前端转时间戳 但不能解决LocalDateTime转时间戳（JacksonCustomizerConfig类解决）

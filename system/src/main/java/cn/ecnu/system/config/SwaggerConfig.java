@@ -3,6 +3,8 @@ package cn.ecnu.system.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -46,14 +48,14 @@ public class SwaggerConfig {
      * 配置swagger信息apiInfo，作者信息
      */
     public ApiInfo apiInfo(){
-        Contact contact = new Contact("农产品溯源系统", "https://www.baidu.com/", "666@ecnu.cn");
-        return new ApiInfo("ECNU Web高级数据库 课程设计",
+        Contact contact = new Contact("农产品溯源系统", "http://trace.lqjai.cn", "web@ecnu.cn");
+        return new ApiInfo("ECNU 高级Web程序开发技术 课程设计",
                 "Web攻坚，一起加油",
                 "1.0",
-                "www.baidu.com",
+                "http://trace.lqjai.cn",
                 contact,
-                "Apache 2.0",
-                "http://localhost:8080/tmall/admin",
+                "Web攻坚小组",
+                "http://trace.lqjai.cn",
                 new ArrayList());
     }
 

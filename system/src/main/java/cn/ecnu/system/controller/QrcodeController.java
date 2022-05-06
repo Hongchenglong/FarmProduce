@@ -20,7 +20,7 @@ import java.util.List;
  * @Description: QrcodeController
  * @Date 2022-04-18 21:25:40
  *****/
-@Api(value = "QrcodeController", tags = "QrcodeController")
+@Api(value = "QrcodeController", tags = "溯源码")
 @RestController
 @RequestMapping("/qrcode")
 @CrossOrigin

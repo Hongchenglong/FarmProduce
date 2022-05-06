@@ -14,17 +14,17 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /****
- * @Author: Kili
- * @Description: EnviromentPojo
- * @Date 2022-04-18 21:25:40
+ * @Author: Ecnu
+ * @Description: EnvironmentPojo
+ * @Date 2022-05-06 18:49:20
  *****/
-@ApiModel(description = "Enviroment",value = "Enviroment")
-@TableName(value="enviroment")
+@ApiModel(description = "Environment",value = "Environment")
+@TableName(value="environment")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Enviroment implements Serializable{
+public class Environment implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "",required = true)

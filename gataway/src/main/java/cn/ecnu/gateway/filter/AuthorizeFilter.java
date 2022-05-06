@@ -11,6 +11,7 @@ import org.springframework.core.Ordered;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.RequestPath;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -34,11 +35,14 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
 
         log.info("\n###### request.getURI():{}, \n###### request.getPath():{}, \n###### request.getURI().getPath():{}"
                 , request.getURI(),request.getPath(),request.getURI().getPath());
+
         //3. 判断接口是否放行
         String url = request.getURI().getPath();
         if (URLFilter.hasAuthorization(url)) {
             return chain.filter(exchange);
         }
+        if("/api".equals(request.getURI().getPath()) || "/api/".equals(request.getURI().getPath())) return chain.filter(exchange);
+
         //4. 获取请求头token
         String token = request.getHeaders().getFirst(AUTHORIZE_TOKEN);
         // 如果请求头中不包含token就从cooKie中获取

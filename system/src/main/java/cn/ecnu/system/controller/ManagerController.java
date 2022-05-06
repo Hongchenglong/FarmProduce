@@ -20,7 +20,7 @@ import java.util.List;
  * @Description: ManagerController
  * @Date 2022-04-18 21:25:40
  *****/
-@Api(value = "ManagerController", tags = "ManagerController")
+@Api(value = "ManagerController", tags = "管理员")
 @RestController
 @RequestMapping("/manager")
 @CrossOrigin

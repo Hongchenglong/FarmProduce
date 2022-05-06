@@ -20,7 +20,7 @@ import java.util.List;
  * @Description: EnterpriseController
  * @Date 2022-04-18 21:25:40
  *****/
-@Api(value = "EnterpriseController", tags = "EnterpriseController")
+@Api(value = "EnterpriseController", tags = "企业用户管理")
 @RestController
 @RequestMapping("/enterprise")
 @CrossOrigin

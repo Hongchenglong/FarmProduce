@@ -20,7 +20,7 @@ import java.util.List;
  * @Description: EnvironmentThresholdController
  * @Date 2022-04-18 21:25:40
  *****/
-@Api(value = "EnvironmentThresholdController", tags = "EnvironmentThresholdController")
+@Api(value = "EnvironmentThresholdController", tags = "环境阈值管理")
 @RestController
 @RequestMapping("/environmentThreshold")
 @CrossOrigin

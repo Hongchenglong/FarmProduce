@@ -5,7 +5,8 @@ package cn.ecnu.gateway.filter;
  */
 public class URLFilter {
     // 后期需要方向的请求url
-    private static String uri = "/api/swagger-ui,/api/user/login,/api/user/register";
+    private static String uri = "/api/swagger-ui,/api/swagger-resources,/api/v2/api-docs,/api/user/login,/api/user/register," +
+            "/api/css,/api/js,/api/webfonts";
 
     // 判断用户的请求是否包含上面允许放行的uri
     public static boolean hasAuthorization(String url) {

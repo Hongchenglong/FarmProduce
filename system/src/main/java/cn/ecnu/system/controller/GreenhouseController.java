@@ -20,7 +20,7 @@ import java.util.List;
  * @Description: GreenhouseController
  * @Date 2022-04-18 21:25:40
  *****/
-@Api(value = "GreenhouseController", tags = "GreenhouseController")
+@Api(value = "GreenhouseController", tags = "温室大鹏管理")
 @RestController
 @RequestMapping("/greenhouse")
 @CrossOrigin
