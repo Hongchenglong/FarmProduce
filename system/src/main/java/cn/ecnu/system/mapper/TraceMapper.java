@@ -1,5 +1,6 @@
 package cn.ecnu.system.mapper;
 
+import cn.ecnu.system.model.vo.TraceAndProduceVO;
 import cn.ecnu.system.pojo.Trace;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
@@ -33,5 +34,5 @@ public interface TraceMapper extends BaseMapper<Trace> {
      */
     public Boolean updateLogicDelById(Trace trace);
 
-    List<Trace> selectTraceMap();
+    List<TraceAndProduceVO> selectTraceMap();
 }

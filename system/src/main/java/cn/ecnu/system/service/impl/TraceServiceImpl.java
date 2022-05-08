@@ -3,6 +3,7 @@ package cn.ecnu.system.service.impl;
 import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.common.utils.R;
 import cn.ecnu.system.mapper.TraceMapper;
+import cn.ecnu.system.model.vo.TraceAndProduceVO;
 import cn.ecnu.system.pojo.Trace;
 import cn.ecnu.system.service.TraceService;
 import cn.ecnu.system.model.vo.TraceQueryVO;
@@ -104,7 +105,7 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
     }
 
     @Override
-    public List<Trace> selectTraceMap() {
+    public List<TraceAndProduceVO> selectTraceMap() {
         return baseMapper.selectTraceMap();
     }
 

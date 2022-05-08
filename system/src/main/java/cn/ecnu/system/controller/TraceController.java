@@ -2,6 +2,7 @@ package cn.ecnu.system.controller;
 
 import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.common.utils.R;
+import cn.ecnu.system.model.vo.TraceAndProduceVO;
 import cn.ecnu.system.pojo.Trace;
 import cn.ecnu.system.service.TraceService;
 import cn.ecnu.system.model.vo.TraceQueryVO;
@@ -109,7 +110,7 @@ public class TraceController {
      */
     @ApiOperation("查询所有Trace")
     @GetMapping("/findAll")
-    public R<List<Trace>> findAll() {
+    public R<List<TraceAndProduceVO>> findAll() {
         // 调用TraceService实现查询所有Trace
         return R.ok(traceService.selectTraceMap());
     }

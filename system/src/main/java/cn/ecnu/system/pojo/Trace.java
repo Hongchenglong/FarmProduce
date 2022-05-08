@@ -61,8 +61,4 @@ public class Trace implements Serializable{
 	@ApiModelProperty(value = "创建时间",required = false)
 	private LocalDateTime createTime;	//创建时间
 
-	// private FarmProduce farmProduce;
-
-	@ApiModelProperty("农产品名称")
-	private String produceName;
 }
