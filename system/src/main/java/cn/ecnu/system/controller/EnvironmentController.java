@@ -85,7 +85,7 @@ public class EnvironmentController {
      * @return
      */
     @ApiOperation("Environment根据ID修改")
-    @PutMapping
+    @PutMapping("/update")
     public R update(@RequestBody @ApiParam(name = "Environment对象",value = "传入JSON数据",required = false) Environment environment){
         //调用EnvironmentService实现修改Environment
         return R.ok(environmentService.updateById(environment));
@@ -97,7 +97,7 @@ public class EnvironmentController {
      * @return
      */
     @ApiOperation("Environment添加")
-    @PostMapping
+    @PostMapping("/add")
     public R addEnvnInfo(@RequestBody EnvironmentDTO environmentDTO){
         Environment environment = EnvironmentConvert.INSTANCE.convert(environmentDTO);
         Greenhouse greenhouse = greenhouseService.getById(environmentDTO.getGreenhouseId());
