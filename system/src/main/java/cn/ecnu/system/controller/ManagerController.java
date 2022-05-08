@@ -73,7 +73,7 @@ public class ManagerController {
      * @return
      */
     @ApiOperation("Manager根据ID修改")
-    @PutMapping
+    @PutMapping("/update")
     public R update(@RequestBody @ApiParam(name = "Manager对象",value = "传入JSON数据",required = false) Manager manager){
         //调用ManagerService实现修改Manager
         return R.ok(managerService.updateById(manager));
@@ -85,7 +85,7 @@ public class ManagerController {
      * @return
      */
     @ApiOperation("Manager添加")
-    @PostMapping
+    @PostMapping("/add")
     public R add(@RequestBody  @ApiParam(name = "Manager对象",value = "传入JSON数据",required = true) Manager manager){
         //调用ManagerService实现添加Manager
         return R.ok(managerService.save(manager));
@@ -109,7 +109,7 @@ public class ManagerController {
      * @return
      */
     @ApiOperation("查询所有Manager")
-    @GetMapping
+    @GetMapping("/findAll")
     public R<List<Manager>> findAll(){
         //调用ManagerService实现查询所有Manager
         return R.ok(managerService.list(Wrappers.<Manager>lambdaQuery().orderByDesc(Manager::getCreateTime))) ;

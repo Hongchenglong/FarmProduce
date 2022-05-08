@@ -73,7 +73,7 @@ public class GreenhouseController {
      * @return
      */
     @ApiOperation("Greenhouse根据ID修改")
-    @PutMapping
+    @PutMapping("/update")
     public R update(@RequestBody @ApiParam(name = "Greenhouse对象",value = "传入JSON数据",required = false) Greenhouse greenhouse){
         //调用GreenhouseService实现修改Greenhouse
         return R.ok(greenhouseService.updateById(greenhouse));
@@ -85,7 +85,7 @@ public class GreenhouseController {
      * @return
      */
     @ApiOperation("Greenhouse添加")
-    @PostMapping
+    @PostMapping("/add")
     public R add(@RequestBody  @ApiParam(name = "Greenhouse对象",value = "传入JSON数据",required = true) Greenhouse greenhouse){
         //调用GreenhouseService实现添加Greenhouse
         return R.ok(greenhouseService.save(greenhouse));
@@ -109,7 +109,7 @@ public class GreenhouseController {
      * @return
      */
     @ApiOperation("查询所有Greenhouse")
-    @GetMapping
+    @GetMapping("/findAll")
     public R<List<Greenhouse>> findAll(){
         //调用GreenhouseService实现查询所有Greenhouse
         return R.ok(greenhouseService.list(Wrappers.<Greenhouse>lambdaQuery().orderByDesc(Greenhouse::getCreateTime))) ;

@@ -73,7 +73,7 @@ public class EnterpriseController {
      * @return
      */
     @ApiOperation("Enterprise根据ID修改")
-    @PutMapping
+    @PutMapping("/update")
     public R update(@RequestBody @ApiParam(name = "Enterprise对象",value = "传入JSON数据",required = false) Enterprise enterprise){
         //调用EnterpriseService实现修改Enterprise
         return R.ok(enterpriseService.updateById(enterprise));
@@ -85,7 +85,7 @@ public class EnterpriseController {
      * @return
      */
     @ApiOperation("Enterprise添加")
-    @PostMapping
+    @PostMapping("/add")
     public R add(@RequestBody  @ApiParam(name = "Enterprise对象",value = "传入JSON数据",required = true) Enterprise enterprise){
         //调用EnterpriseService实现添加Enterprise
         return R.ok(enterpriseService.save(enterprise));
@@ -109,7 +109,7 @@ public class EnterpriseController {
      * @return
      */
     @ApiOperation("查询所有Enterprise")
-    @GetMapping
+    @GetMapping("/findAll")
     public R<List<Enterprise>> findAll(){
         //调用EnterpriseService实现查询所有Enterprise
         return R.ok(enterpriseService.list(Wrappers.<Enterprise>lambdaQuery().orderByDesc(Enterprise::getCreateTime))) ;

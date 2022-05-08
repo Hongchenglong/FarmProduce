@@ -73,7 +73,7 @@ public class EnvironmentThresholdController {
      * @return
      */
     @ApiOperation("EnvironmentThreshold根据ID修改")
-    @PutMapping
+    @PutMapping("/update")
     public R update(@RequestBody @ApiParam(name = "EnvironmentThreshold对象",value = "传入JSON数据",required = false) EnvironmentThreshold environmentThreshold){
         //调用EnvironmentThresholdService实现修改EnvironmentThreshold
         return R.ok(environmentThresholdService.updateById(environmentThreshold));
@@ -85,7 +85,7 @@ public class EnvironmentThresholdController {
      * @return
      */
     @ApiOperation("EnvironmentThreshold添加")
-    @PostMapping
+    @PostMapping("/add")
     public R add(@RequestBody  @ApiParam(name = "EnvironmentThreshold对象",value = "传入JSON数据",required = true) EnvironmentThreshold environmentThreshold){
         //调用EnvironmentThresholdService实现添加EnvironmentThreshold
         return R.ok(environmentThresholdService.save(environmentThreshold));
@@ -109,7 +109,7 @@ public class EnvironmentThresholdController {
      * @return
      */
     @ApiOperation("查询所有EnvironmentThreshold")
-    @GetMapping
+    @GetMapping("/findAll")
     public R<List<EnvironmentThreshold>> findAll(){
         //调用EnvironmentThresholdService实现查询所有EnvironmentThreshold
         return R.ok(environmentThresholdService.list(Wrappers.<EnvironmentThreshold>lambdaQuery().orderByDesc(EnvironmentThreshold::getCreateTime))) ;

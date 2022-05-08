@@ -73,7 +73,7 @@ public class QrcodeController {
      * @return
      */
     @ApiOperation("Qrcode根据ID修改")
-    @PutMapping
+    @PutMapping("/update")
     public R update(@RequestBody @ApiParam(name = "Qrcode对象",value = "传入JSON数据",required = false) Qrcode qrcode){
         //调用QrcodeService实现修改Qrcode
         return R.ok(qrcodeService.updateById(qrcode));
@@ -85,7 +85,7 @@ public class QrcodeController {
      * @return
      */
     @ApiOperation("Qrcode添加")
-    @PostMapping
+    @PostMapping("/add")
     public R add(@RequestBody  @ApiParam(name = "Qrcode对象",value = "传入JSON数据",required = true) Qrcode qrcode){
         //调用QrcodeService实现添加Qrcode
         return R.ok(qrcodeService.save(qrcode));
@@ -109,7 +109,7 @@ public class QrcodeController {
      * @return
      */
     @ApiOperation("查询所有Qrcode")
-    @GetMapping
+    @GetMapping("/findAll")
     public R<List<Qrcode>> findAll(){
         //调用QrcodeService实现查询所有Qrcode
         return R.ok(qrcodeService.list(Wrappers.<Qrcode>lambdaQuery().orderByDesc(Qrcode::getCreateTime))) ;
