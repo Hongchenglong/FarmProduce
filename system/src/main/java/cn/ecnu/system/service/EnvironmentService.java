@@ -1,8 +1,11 @@
 package cn.ecnu.system.service;
 
 import cn.ecnu.common.utils.PageResult;
+import cn.ecnu.system.model.vo.EnvironmentVO;
 import cn.ecnu.system.pojo.Environment;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /****
  * @Author: Ecnu
@@ -22,4 +25,9 @@ public interface EnvironmentService extends IService<Environment> {
 
     PageResult findPage(int pageNo, int size);
 
+    Boolean deleteEvn(Long id);
+
+    EnvironmentVO queryInfo(Environment environment);
+
+    List<EnvironmentVO> queryEnv(Integer days);
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.ecnu.trace.mapper.TraceMapper">
+<mapper namespace="cn.ecnu.system.mapper.TraceMapper">
 
     <resultMap id="TraceMap" type="cn.ecnu.system.pojo.Trace">
         <result property="id" column="id"/>
@@ -16,7 +16,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="createTime" column="create_time"/>
         <result property="produceName" column="product_name"/>
-<!--        <association property="farmProduce" javaType="cn.ecnu.trace.pojo.FarmProduce">-->
+<!--        <association property="farmProduce" javaType="cn.ecnu.system.pojo.FarmProduce">-->
 <!--            <id property="id" column="id"/>-->
 <!--            <result property="name" column="name"/>-->
 <!--            <result property="greenhouseId" column="greenhouse_id"/>-->

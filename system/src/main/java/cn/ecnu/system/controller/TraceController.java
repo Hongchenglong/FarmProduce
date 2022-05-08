@@ -4,7 +4,7 @@ import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.common.utils.R;
 import cn.ecnu.system.pojo.Trace;
 import cn.ecnu.system.service.TraceService;
-import cn.ecnu.system.vo.TraceQueryVO;
+import cn.ecnu.system.model.vo.TraceQueryVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

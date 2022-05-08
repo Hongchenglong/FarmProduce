@@ -1,4 +1,4 @@
-package cn.ecnu.system.vo;
+package cn.ecnu.system.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -3,7 +3,7 @@ package cn.ecnu.system.service;
 import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.common.utils.R;
 import cn.ecnu.system.pojo.Trace;
-import cn.ecnu.system.vo.TraceQueryVO;
+import cn.ecnu.system.model.vo.TraceQueryVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

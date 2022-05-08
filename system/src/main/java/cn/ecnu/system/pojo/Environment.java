@@ -11,12 +11,14 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /****
  * @Author: Ecnu
  * @Description: EnvironmentPojo
- * @Date 2022-05-06 18:49:20
+ * @Date 2022-05-07 11:15:40
  *****/
 @ApiModel(description = "Environment",value = "Environment")
 @TableName(value="environment")
@@ -32,28 +34,28 @@ public class Environment implements Serializable{
 	private Long id;	//
 
 	@ApiModelProperty(value = "空气温度",required = false)
-	private String airTemperature;	//空气温度
+	private BigDecimal airTemperature;	//空气温度
 
 	@ApiModelProperty(value = "空气湿度",required = false)
-	private String airHumidity;	//空气湿度
+	private BigDecimal airHumidity;	//空气湿度
 
 	@ApiModelProperty(value = "二氧化碳",required = false)
-	private String CO2;	//二氧化碳
+	private BigDecimal co2;	//二氧化碳
 
 	@ApiModelProperty(value = "光照度",required = false)
-	private String illuminance;	//光照度
+	private BigDecimal illuminance;	//光照度
 
 	@ApiModelProperty(value = "土壤温度",required = false)
-	private String soilTemperature;	//土壤温度
+	private BigDecimal soilTemperature;	//土壤温度
 
 	@ApiModelProperty(value = "土壤湿度",required = false)
-	private String soilHumidity;	//土壤湿度
+	private BigDecimal soilHumidity;	//土壤湿度
 
 	@ApiModelProperty(value = "日期",required = false)
-	private LocalDateTime date;	//日期
+	private LocalDate date;	//日期
 
 	@ApiModelProperty(value = "大棚id",required = false)
-	private Integer greenhouseId;	//大棚id
+	private Long greenhouseId;	//大棚id
 
 	@ApiModelProperty(value = "创建时间",required = false)
 	private LocalDateTime createTime;	//创建时间
