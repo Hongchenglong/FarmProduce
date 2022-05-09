@@ -47,9 +47,11 @@ public class EnvironmentTask {
 
     }
 
+
+    //一个小时更新一次
+    @Scheduled(cron = "0 1 * * * ?")
     //每隔30秒实时更新大棚环境指标
-    @Scheduled(cron = "0/30 * * * * ?")
-//    @Scheduled(cron = "0/10 * * * * ?")
+    //@Scheduled(cron = "0/30 * * * * ?")
     public void synEnv(){
         //定时任务已在服务器上跑了，本地Windows不执行定时任务，防止频率太快日志刷屏且占用系统资源
         if(System.getProperty("os.name").contains("Windows")) return;

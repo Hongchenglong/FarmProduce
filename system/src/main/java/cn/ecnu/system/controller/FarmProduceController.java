@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -61,6 +62,7 @@ public class FarmProduceController {
      */
     @ApiOperation("FarmProduce根据ID删除")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R delete(@PathVariable Long id) {
         //调用FarmProduceService实现根据主键删除
         return R.ok(farmProduceService.removeById(id));
@@ -73,6 +75,7 @@ public class FarmProduceController {
      */
     @ApiOperation("FarmProduce根据ID修改")
     @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R update(@RequestBody @ApiParam(name = "FarmProduce对象", value = "传入JSON数据", required = false) FarmProduce farmProduce) {
         //调用FarmProduceService实现修改FarmProduce
         return R.ok(farmProduceService.updateById(farmProduce));
@@ -85,6 +88,7 @@ public class FarmProduceController {
      */
     @ApiOperation("FarmProduce添加")
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R add(@RequestBody @ApiParam(name = "FarmProduce对象", value = "传入JSON数据", required = true) FarmProduce farmProduce) {
         //调用FarmProduceService实现添加FarmProduce
         return R.ok(farmProduceService.save(farmProduce));

@@ -6,7 +6,7 @@ import java.util.Random;
 /***
  *
  * @Author: www.lqjai.com
- * @Description: itheima
+ * @Description: traceap
  *
  ****/
 public class ChineseUtils {

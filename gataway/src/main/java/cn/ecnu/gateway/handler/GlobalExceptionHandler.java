@@ -1,5 +1,7 @@
 package cn.ecnu.gateway.handler;
 
+import cn.ecnu.common.exception.ServiceException;
+import cn.ecnu.common.exception.utils.ServiceExceptionUtil;
 import cn.ecnu.common.utils.R;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,12 +43,16 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 		if (ex instanceof ResponseStatusException) {
 			response.setStatusCode(((ResponseStatusException) ex).getStatus());
 		}
+
 		return response.writeWith(Mono.fromSupplier(() -> {
 			DataBufferFactory bufferFactory = response.bufferFactory();
 			try {
+				if (ex instanceof ServiceException) {
+					ServiceException se = (ServiceException) ex;
+					return bufferFactory.wrap(objectMapper.writeValueAsBytes(R.err(se.getCode(), se.getMessage())));
+				}
 				return bufferFactory.wrap(objectMapper.writeValueAsBytes(R.error(ex.getMessage())));
-			}
-			catch (JsonProcessingException e) {
+			} catch (JsonProcessingException e) {
 				log.error("Error writing response", ex);
 				return bufferFactory.wrap(new byte[0]);
 			}

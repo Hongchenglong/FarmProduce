@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,6 +63,7 @@ public class EnvironmentThresholdController {
      */
     @ApiOperation("EnvironmentThreshold根据ID删除")
     @DeleteMapping("/{id}" )
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R delete(@PathVariable  Long id){
         //调用EnvironmentThresholdService实现根据主键删除
         return R.ok(environmentThresholdService.removeById(id));
@@ -86,6 +88,7 @@ public class EnvironmentThresholdController {
      */
     @ApiOperation("EnvironmentThreshold添加")
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R add(@RequestBody  @ApiParam(name = "EnvironmentThreshold对象",value = "传入JSON数据",required = true) EnvironmentThreshold environmentThreshold){
         //调用EnvironmentThresholdService实现添加EnvironmentThreshold
         return R.ok(environmentThresholdService.save(environmentThreshold));

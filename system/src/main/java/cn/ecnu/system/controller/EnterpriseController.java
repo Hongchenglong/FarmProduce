@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,6 +61,7 @@ public class EnterpriseController {
      * @param id
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     @ApiOperation("Enterprise根据ID删除")
     @DeleteMapping("/{id}" )
     public R delete(@PathVariable Long id){
@@ -74,6 +76,7 @@ public class EnterpriseController {
      */
     @ApiOperation("Enterprise根据ID修改")
     @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R update(@RequestBody @ApiParam(name = "Enterprise对象",value = "传入JSON数据",required = false) Enterprise enterprise){
         //调用EnterpriseService实现修改Enterprise
         return R.ok(enterpriseService.updateById(enterprise));
@@ -86,6 +89,7 @@ public class EnterpriseController {
      */
     @ApiOperation("Enterprise添加")
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R add(@RequestBody  @ApiParam(name = "Enterprise对象",value = "传入JSON数据",required = true) Enterprise enterprise){
         //调用EnterpriseService实现添加Enterprise
         return R.ok(enterpriseService.save(enterprise));

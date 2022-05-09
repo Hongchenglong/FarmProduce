@@ -5,14 +5,36 @@ spring:
     gateway:
       globalcors:
         corsConfigurations:
-          '[/**]': # 匹配所有请求
-            allowedOrigins: "*" #跨域处理 允许所有的域
-            allowedMethods: # 支持的方法
-              - GET
-              - POST
-              - PUT
-              - DELETE
+          '[/**]':
+            allowCredentials: true
+            allowedHeaders: '*'
+            allowedMethods: '*'
+            allowedOrigins: '*'
       routes:
+        - id: oauth
+          uri: lb://oauth
+          predicates:
+            - Path=/api/oauth/login
+          filters:
+            - StripPrefix=1
+        - id: web
+          uri: lb://web
+          predicates:
+            - Path=/wf/assets/src/**
+          filters:
+            - StripPrefix=3
+        - id: web
+          uri: lb://web
+          predicates:
+            - Path=/wf/src/**
+          filters:
+            - StripPrefix=2
+        - id: web
+          uri: lb://web
+          predicates:
+            - Path=/wf,/wf/**
+          filters:
+            - StripPrefix=1
         - id: system
           uri: lb://system
           predicates:
@@ -34,12 +56,3 @@ eureka:
       defaultZone: http://127.0.0.1:7001/eureka
   instance:
     prefer-ip-address: true
-
-feign:
-  hystrix:
-    enabled: true
-  client:
-    config:
-      default:
-        connect-timeout: 300000
-        read-timeout: 300000

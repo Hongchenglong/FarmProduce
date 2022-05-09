@@ -1,13 +1,18 @@
 package cn.ecnu.system.controller;
 
 import cn.ecnu.common.utils.R;
+import cn.ecnu.common.utils.TokenDecode;
+import cn.ecnu.system.convert.UserConvert;
+import cn.ecnu.system.model.vo.EnterpriseVO;
 import cn.ecnu.system.pojo.Enterprise;
 import cn.ecnu.system.service.EnterpriseService;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -28,7 +33,7 @@ public class UserController {
     private EnterpriseService enterpriseService;
 
     /***
-     * 用户登录
+     * 此接口已废弃，登录接口网关路由到oauth微服务
      */
     @ApiOperation("登录")
     @PostMapping(value = "/login")
@@ -44,8 +49,27 @@ public class UserController {
         return R.ok(jwt);
     }
 
+    /***
+     * 根据ID查询User数据
+     * @return
+     */
+    @ApiOperation(value = "User根据username查询")
+    @GetMapping("/info")
+    public R<EnterpriseVO> findUserInfo(){
+        String username = null;
+        try {
+            username = TokenDecode.getUserInfo().get("username");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //调用UserService实现根据主键查询User
+        Enterprise user = enterpriseService.getOne(Wrappers.<Enterprise>lambdaQuery().eq(Enterprise::getAccount, username));
+        return R.ok(UserConvert.INSTANCE.convert(user));
+    }
+
     @ApiOperation("注册")
     @PostMapping("/register")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R<String> register(@RequestBody Enterprise enterprise) {
         return enterpriseService.register(enterprise);
     }

@@ -19,7 +19,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * 鉴权过滤器 验证token
+ * 鉴权过滤器 只验证token是否存在，放行后oauth鉴权
  */
 @Component
 @Slf4j
@@ -41,11 +41,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         if (URLFilter.hasAuthorization(url)) {
             return chain.filter(exchange);
         }
-        if("/api".equals(request.getURI().getPath()) ||
-           "/api/".equals(request.getURI().getPath()) ||
-           request.getURI().getPath().contains("/trace/")) {
-                return chain.filter(exchange);
-            }
+        if("/api".equals(request.getURI().getPath()) || "/api/".equals(request.getURI().getPath())) return chain.filter(exchange);
 
         //4. 获取请求头token
         String token = request.getHeaders().getFirst(AUTHORIZE_TOKEN);
@@ -54,24 +50,20 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
             HttpCookie cookie = request.getCookies().getFirst(AUTHORIZE_TOKEN);
             if (cookie != null) {
                 token = cookie.getValue();
-                try {
-                    //解析令牌，抛异常代表未授权
-                    JwtUtil.parseJWT(token);
+                // 将token添加到请求头信息,有对应的微服务去解析
+                if(!token.startsWith("bearer ") && !token.startsWith("Bearer "))
+                    token = "Bearer " + token;
+                request.mutate().header(AUTHORIZE_TOKEN, token);
+                log.info("\n###### 从cookie中获取token,存入请求头中");
 
-                    // 将token添加到请求头信息,有对应的微服务去解析
-                    if(!token.startsWith("bearer ") && !token.startsWith("Bearer "))
-                        token = "Bearer " + token;
-                    request.mutate().header(AUTHORIZE_TOKEN, token);
-                    log.info("\n###### 从cookie中获取token,存入请求头中");
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    log.info("\n###### token非法！！！！！！！！！");
-                    throw ServiceExceptionUtil.exception(new ErrorCode(401, HttpStatus.UNAUTHORIZED.getReasonPhrase()));
-                }
             }else {
-                throw ServiceExceptionUtil.exception(new ErrorCode(401, HttpStatus.UNAUTHORIZED.getReasonPhrase()));
+                throw ServiceExceptionUtil.exception(new ErrorCode(2022520, HttpStatus.UNAUTHORIZED.getReasonPhrase()));
             }
+        }else {
+            if(!token.startsWith("bearer ") && !token.startsWith("Bearer "))
+                token = "Bearer " + token;
+            request.mutate().header(AUTHORIZE_TOKEN, token);
+            log.info("\n###### 从cookie中获取token,存入请求头中");
         }
 
         // 放行

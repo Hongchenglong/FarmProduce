@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,6 +63,7 @@ public class TraceController {
      */
     @ApiOperation("Trace根据ID删除")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('admin')")
     public R delete(@PathVariable Long id) {
         //调用TraceService实现根据主键删除
         return R.ok(traceService.removeById(id));
@@ -74,6 +76,7 @@ public class TraceController {
      */
     @ApiOperation("Trace根据ID修改")
     @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('admin')")
     public R update(@RequestBody @ApiParam(name = "Trace对象", value = "传入JSON数据", required = false) Trace trace) {
         //调用TraceService实现修改Trace
         return R.ok(traceService.updateById(trace));
@@ -86,6 +89,7 @@ public class TraceController {
      */
     @ApiOperation("Trace添加")
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('admin')")
     public R add(@RequestBody @ApiParam(name = "Trace对象", value = "传入JSON数据", required = true) Trace trace) {
         //调用TraceService实现添加Trace
         return R.ok(traceService.save(trace));

@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -74,6 +75,7 @@ public class EnvironmentController {
      */
     @ApiOperation("Environment根据ID删除")
     @DeleteMapping("/{id}" )
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R delete(@PathVariable  Long id){
         //调用EnvironmentService实现根据主键删除
         return R.ok(environmentService.deleteEvn(id));
@@ -86,6 +88,7 @@ public class EnvironmentController {
      */
     @ApiOperation("Environment根据ID修改")
     @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R update(@RequestBody @ApiParam(name = "Environment对象",value = "传入JSON数据",required = false) Environment environment){
         //调用EnvironmentService实现修改Environment
         return R.ok(environmentService.updateById(environment));
@@ -98,6 +101,7 @@ public class EnvironmentController {
      */
     @ApiOperation("Environment添加")
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R addEnvnInfo(@RequestBody EnvironmentDTO environmentDTO){
         Environment environment = EnvironmentConvert.INSTANCE.convert(environmentDTO);
         Greenhouse greenhouse = greenhouseService.getById(environmentDTO.getGreenhouseId());

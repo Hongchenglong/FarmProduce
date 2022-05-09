@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,6 +63,7 @@ public class GreenhouseController {
      */
     @ApiOperation("Greenhouse根据ID删除")
     @DeleteMapping("/{id}" )
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R delete(@PathVariable  Long id){
         //调用GreenhouseService实现根据主键删除
         return R.ok(greenhouseService.removeById(id));
@@ -74,6 +76,7 @@ public class GreenhouseController {
      */
     @ApiOperation("Greenhouse根据ID修改")
     @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R update(@RequestBody @ApiParam(name = "Greenhouse对象",value = "传入JSON数据",required = false) Greenhouse greenhouse){
         //调用GreenhouseService实现修改Greenhouse
         return R.ok(greenhouseService.updateById(greenhouse));
@@ -86,6 +89,7 @@ public class GreenhouseController {
      */
     @ApiOperation("Greenhouse添加")
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('super_admin')")
     public R add(@RequestBody  @ApiParam(name = "Greenhouse对象",value = "传入JSON数据",required = true) Greenhouse greenhouse){
         //调用GreenhouseService实现添加Greenhouse
         return R.ok(greenhouseService.save(greenhouse));

@@ -42,4 +42,4 @@ application.properties中配置
 6.多条件搜索时，如果属性名字包含name、title，则会进行like模糊搜索
 ```
 ## 3. 视频教程
-http://qjmall.lqjai.com/wsearch/100000616307?sourceType=6
+http://traceap.lqjai.com/wsearch/100000616307?sourceType=6

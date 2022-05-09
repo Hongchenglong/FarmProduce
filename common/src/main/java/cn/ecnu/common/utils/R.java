@@ -64,4 +64,11 @@ public class R<T> {
                 .setMessage(message.toString());
         return r;
     }
+
+    public static <T> R<T> err(Integer code, T message) {
+        R<T> r = new R<>();
+        r.setFlag(false).setCode(code)
+                .setMessage(message.toString());
+        return r;
+    }
 }

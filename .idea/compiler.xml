@@ -11,11 +11,14 @@
         <module name="system" />
         <module name="common" />
         <module name="code-generate" />
+        <module name="oauth2" />
         <module name="Eureka" />
+        <module name="farm-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="web" target="8" />
+      <module name="oauth" target="8" />
+      <module name="user-auth" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -23,9 +26,12 @@
       <module name="Eureka" options="-parameters" />
       <module name="code-generate" options="-parameters" />
       <module name="common" options="-parameters" />
+      <module name="farm-web" options="-parameters" />
       <module name="gataway" options="-parameters" />
+      <module name="oauth" options="-parameters" />
+      <module name="oauth2" options="-parameters" />
       <module name="system" options="-parameters" />
-      <module name="web" options="-parameters" />
+      <module name="user-auth" options="-parameters" />
     </option>
   </component>
 </project>
