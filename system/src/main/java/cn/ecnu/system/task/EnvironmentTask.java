@@ -2,12 +2,10 @@ package cn.ecnu.system.task;
 
 import cn.ecnu.system.model.vo.EnvironmentVO;
 import cn.ecnu.system.pojo.Environment;
+import cn.ecnu.system.pojo.EnvironmentAlert;
 import cn.ecnu.system.pojo.EnvironmentItem;
 import cn.ecnu.system.pojo.Greenhouse;
-import cn.ecnu.system.service.DataService;
-import cn.ecnu.system.service.EnvironmentItemService;
-import cn.ecnu.system.service.EnvironmentService;
-import cn.ecnu.system.service.GreenhouseService;
+import cn.ecnu.system.service.*;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +28,8 @@ public class EnvironmentTask {
     @Autowired
     private EnvironmentItemService environmentItemService;
     @Autowired
+    private EnvironmentAlertService alertService;
+    @Autowired
     private DataService dataService;
 
     //每天0点1分添加新的一天所有大棚的环境数据
@@ -44,14 +44,17 @@ public class EnvironmentTask {
             }
         }
         log.info("\n###### updateEnv 已更新{} 所有大棚数据，数量：{}", LocalDate.now(), greenhouses.size());
-
+        //删除超过一个月的历史数据
+        environmentService.remove(Wrappers.<Environment>lambdaQuery().lt(Environment::getDate,LocalDate.now().minusDays(31)));
+        environmentItemService.remove(Wrappers.<EnvironmentItem>lambdaQuery().lt(EnvironmentItem::getTime,LocalDateTime.now().minusDays(31)));
+        alertService.remove(Wrappers.<EnvironmentAlert>lambdaQuery().lt(EnvironmentAlert::getCreateTime, LocalDateTime.now().minusDays(31)));
     }
 
 
-    //一个小时更新一次
-    @Scheduled(cron = "0 1 * * * ?")
+    //每隔5分钟更新一次
+    @Scheduled(cron = "0 0/5 * * * ?")
     //每隔30秒实时更新大棚环境指标
-    //@Scheduled(cron = "0/30 * * * * ?")
+//    @Scheduled(cron = "0/30 * * * * ?")
     public void synEnv(){
         //定时任务已在服务器上跑了，本地Windows不执行定时任务，防止频率太快日志刷屏且占用系统资源
         if(System.getProperty("os.name").contains("Windows")) return;
@@ -72,9 +75,6 @@ public class EnvironmentTask {
             environmentService.updateBatchById(environmentList);
             log.info("\n###### synEnv 已实时更新{}个大棚数据，时间：{}", environmentList.size(), LocalDateTime.now());
         }
-        //删除超过一个月的历史数据
-        environmentService.remove(Wrappers.<Environment>lambdaQuery().lt(Environment::getDate,LocalDate.now().minusDays(31)));
-        environmentItemService.remove(Wrappers.<EnvironmentItem>lambdaQuery().lt(EnvironmentItem::getTime,LocalDateTime.now().minusDays(31)));
     }
 
     public static void main(String[] args) {

@@ -23,7 +23,7 @@ import java.util.List;
  *****/
 @Api(value = "EnvironmentThresholdController", tags = "环境阈值管理")
 @RestController
-@RequestMapping("/environmentThreshold")
+@RequestMapping("/threshold")
 @CrossOrigin
 @Slf4j
 public class EnvironmentThresholdController {
@@ -75,7 +75,7 @@ public class EnvironmentThresholdController {
      * @return
      */
     @ApiOperation("EnvironmentThreshold根据ID修改")
-    @PutMapping("/update")
+    @PutMapping
     public R update(@RequestBody @ApiParam(name = "EnvironmentThreshold对象",value = "传入JSON数据",required = false) EnvironmentThreshold environmentThreshold){
         //调用EnvironmentThresholdService实现修改EnvironmentThreshold
         return R.ok(environmentThresholdService.updateById(environmentThreshold));
@@ -87,7 +87,7 @@ public class EnvironmentThresholdController {
      * @return
      */
     @ApiOperation("EnvironmentThreshold添加")
-    @PostMapping("/add")
+    @PostMapping
     @PreAuthorize("hasAnyAuthority('super_admin')")
     public R add(@RequestBody  @ApiParam(name = "EnvironmentThreshold对象",value = "传入JSON数据",required = true) EnvironmentThreshold environmentThreshold){
         //调用EnvironmentThresholdService实现添加EnvironmentThreshold

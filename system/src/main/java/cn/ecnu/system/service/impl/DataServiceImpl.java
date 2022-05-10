@@ -4,10 +4,10 @@ import cn.ecnu.common.utils.IdWorker;
 import cn.ecnu.system.convert.EnvironmentConvert;
 import cn.ecnu.system.model.vo.EnvironmentVO;
 import cn.ecnu.system.pojo.Environment;
+import cn.ecnu.system.pojo.EnvironmentAlert;
 import cn.ecnu.system.pojo.EnvironmentItem;
-import cn.ecnu.system.service.DataService;
-import cn.ecnu.system.service.EnvironmentItemService;
-import cn.ecnu.system.service.EnvironmentService;
+import cn.ecnu.system.pojo.EnvironmentThreshold;
+import cn.ecnu.system.service.*;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +30,10 @@ public class DataServiceImpl implements DataService {
     private EnvironmentItemService environmentItemService;
     @Autowired
     private IdWorker idWorker;
+    @Autowired
+    private EnvironmentThresholdService thresholdService;
+    @Autowired
+    private EnvironmentAlertService alertService;
 
     @Override
     public EnvironmentVO addEnvnInfo(Environment environment) {
@@ -83,13 +87,43 @@ public class DataServiceImpl implements DataService {
 
     @Override
     public Environment synEnvnInfo(Environment environment) {
+        EnvironmentThreshold threshold = thresholdService.getOne(Wrappers.lambdaQuery(new EnvironmentThreshold().setGreenhouseId(environment.getGreenhouseId()).setOpen(1)));
+        Boolean flag = false; //警告标志
+        EnvironmentAlert alert = new EnvironmentAlert();
 
-        double airTemperature = RandomUtil.randomDouble(25, 42);    //空气温度
-        double airHumidity = RandomUtil.randomDouble(30, 80); //空气湿度
-        double co2 = RandomUtil.randomDouble(500, 1200); //二氧化碳浓度
-        double illuminance = RandomUtil.randomDouble(300, 800); //光照度
-        double soilTemperature = RandomUtil.randomDouble(25, 40); //土壤温度
-        double soilHumidity = RandomUtil.randomDouble(30,90); //土壤湿度
+        double airTemperature = RandomUtil.randomDouble(10, 45);    //空气温度
+        double airHumidity = RandomUtil.randomDouble(10, 90); //空气湿度
+        double co2 = RandomUtil.randomDouble(200, 2000); //二氧化碳浓度
+        double illuminance = RandomUtil.randomDouble(100, 1500); //光照度
+        double soilTemperature = RandomUtil.randomDouble(10, 45); //土壤温度
+        double soilHumidity = RandomUtil.randomDouble(10,90); //土壤湿度
+
+        if(threshold != null){
+            if(airTemperature > threshold.getAirTempMax().doubleValue() || airTemperature < threshold.getAirTempMin().doubleValue()) {
+                flag = true;//超出阈值
+                alert.setAirTemperature(new BigDecimal( airTemperature - threshold.getAirTempMin().doubleValue() < 0 ? (airTemperature - threshold.getAirTempMin().doubleValue()) : (airTemperature -threshold.getAirTempMax().doubleValue())));
+            }else alert.setAirTemperature(new BigDecimal(0));
+            if(airHumidity > threshold.getAirHumMax().doubleValue() || airHumidity < threshold.getAirHumMin().doubleValue()) {
+                flag = true;//超出阈值
+                alert.setAirHumidity(new BigDecimal( airHumidity - threshold.getAirHumMin().doubleValue() < 0 ? (airHumidity - threshold.getAirHumMin().doubleValue()) : (airHumidity - threshold.getAirHumMax().doubleValue())));
+            }else alert.setAirHumidity(new BigDecimal(0));
+            if(co2 > threshold.getCo2Max().doubleValue() || co2 < threshold.getCo2Min().doubleValue()) {
+                flag = true;//超出阈值
+                alert.setCo2(new BigDecimal( co2 - threshold.getCo2Min().doubleValue() < 0 ? (co2 - threshold.getCo2Min().doubleValue()) : (co2 - threshold.getCo2Max().doubleValue())));
+            }else alert.setCo2(new BigDecimal(0));
+            if(illuminance > threshold.getIlluminanceMax().doubleValue() || illuminance < threshold.getIlluminanceMin().doubleValue()) {
+                flag = true;//超出阈值
+                alert.setIlluminance(new BigDecimal( illuminance - threshold.getIlluminanceMin().doubleValue() < 0 ? (illuminance - threshold.getIlluminanceMin().doubleValue()) : (illuminance - threshold.getIlluminanceMax().doubleValue())));
+            }else alert.setIlluminance(new BigDecimal(0));
+            if(soilTemperature > threshold.getSoilTempMax().doubleValue() || soilTemperature < threshold.getSoilTempMin().doubleValue()) {
+                flag = true;//超出阈值
+                alert.setSoilTemperature(new BigDecimal( soilTemperature - threshold.getSoilTempMin().doubleValue() < 0 ? (soilTemperature - threshold.getSoilTempMin().doubleValue()) : (soilTemperature - threshold.getSoilTempMax().doubleValue())));
+            }else alert.setSoilTemperature(new BigDecimal(0));
+            if(soilHumidity > threshold.getSoilHumidMax().doubleValue() || soilHumidity < threshold.getSoilHumidMin().doubleValue()) {
+                flag = true;//超出阈值
+                alert.setSoilTemperature(new BigDecimal( soilHumidity - threshold.getSoilHumidMin().doubleValue() < 0 ? (soilHumidity - threshold.getSoilHumidMin().doubleValue()) : (soilHumidity - threshold.getSoilHumidMax().doubleValue())));
+            }else alert.setSoilTemperature(new BigDecimal(0));
+        }
 
         environment.setAirTemperature(new BigDecimal(airTemperature))
                 .setAirHumidity(new BigDecimal(airHumidity))
@@ -97,6 +131,7 @@ public class DataServiceImpl implements DataService {
                 .setIlluminance(new BigDecimal(illuminance))
                 .setSoilTemperature(new BigDecimal(soilTemperature))
                 .setSoilHumidity(new BigDecimal(soilHumidity)).setUpdateTime(LocalDateTime.now());
+        if(flag) alertService.save(alert.setTime(LocalDateTime.now()));
         return environment;
     }
 

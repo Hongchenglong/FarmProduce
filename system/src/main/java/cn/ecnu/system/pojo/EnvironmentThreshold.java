@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /****
@@ -29,37 +30,46 @@ public class EnvironmentThreshold implements Serializable{
 	private Long id;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String airTempMax;	//
+	private BigDecimal airTempMax;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String airTempMin;	//
+	private BigDecimal airTempMin;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String airHumMax;	//
+	private BigDecimal airHumMax;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String airHumMin;	//
+	private BigDecimal airHumMin;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String CO2Max;	//
+	private BigDecimal co2Max;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String CO2Min;	//
+	private BigDecimal co2Min;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String illuminanceMax;	//
+	private BigDecimal illuminanceMax;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String illuminanceMin;	//
+	private BigDecimal illuminanceMin;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String soilTempMax;	//
+	private BigDecimal soilTempMax;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private String soilTempMin;	//
+	private BigDecimal soilTempMin;	//
 
 	@ApiModelProperty(value = "",required = false)
-	private Integer greenhouseId;	//
+	private BigDecimal soilHumidMax;	//
+
+	@ApiModelProperty(value = "",required = false)
+	private BigDecimal soilHumidMin;	//
+
+	@ApiModelProperty(value = "",required = false)
+	private Long greenhouseId;	//
+
+	@ApiModelProperty(value = "是否开启，1为开启，默认0",required = false)
+	private Integer open;	//是否开启，1为开启，默认0
 
 	@ApiModelProperty(value = "创建时间",required = false)
 	private LocalDateTime createTime;	//创建时间
