@@ -9,11 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
-/****
- * @Author: Kili
- * @Description: TraceService
- * @Date 2022-04-18 21:25:40
- *****/
 public interface TraceService extends IService<Trace> {
 
     /**
@@ -54,5 +49,7 @@ public interface TraceService extends IService<Trace> {
     R findByInterval(TraceQueryVO vo);
 
     List<TraceAndProduceVO> selectTraceMap();
+
+    TraceAndProduceVO selectTraceMapById(Long id);
 
 }

@@ -77,4 +77,8 @@
         from trace t left join farm_produce f on t.produce_id = f.id order by t.id
     </select>
 
+    <select id="selectTraceMapById" parameterType="long" resultMap="TraceAndProduceMap">
+        select t.id, t.qrcode, t.produce_id, f.name product_name, t.enterprise_id, t.greenhouse_id, t.nurture_worker, t.product_worker, t.quality_worker, t.transport_worker, t.update_time, t.create_time
+        from trace t left join farm_produce f on t.produce_id = f.id where t.id = #{id}
+    </select>
 </mapper>
