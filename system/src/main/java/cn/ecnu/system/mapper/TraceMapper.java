@@ -35,4 +35,6 @@ public interface TraceMapper extends BaseMapper<Trace> {
     public Boolean updateLogicDelById(Trace trace);
 
     List<TraceAndProduceVO> selectTraceMap();
+
+    TraceAndProduceVO selectTraceMapById(Long id);
 }

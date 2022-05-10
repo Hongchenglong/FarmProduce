@@ -109,4 +109,8 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
         return baseMapper.selectTraceMap();
     }
 
+    @Override
+    public TraceAndProduceVO selectTraceMapById(Long id) {
+        return baseMapper.selectTraceMapById(id);
+    }
 }

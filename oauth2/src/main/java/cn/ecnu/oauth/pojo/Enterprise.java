@@ -59,6 +59,6 @@ public class Enterprise implements Serializable{
 	private LocalDateTime updateTime;	//更新时间
 
 	//角色权限
-	private String authorities;	//更新时间
+	private String authorities;
 
 }

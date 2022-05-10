@@ -79,13 +79,22 @@ public class EnvironmentAlertController {
         return R.ok(environmentAlertService.updateById(new EnvironmentAlert().setId(id).setHandled(1)));
     }
 
+    @ApiOperation("批量处理")
+    @PostMapping("/batchUpdate")
+    public R batchUpdate(@RequestBody Long[] ids) {
+        for (Long id : ids) {
+            environmentAlertService.updateById(new EnvironmentAlert().setId(id).setHandled(1));
+        }
+        return R.ok();
+    }
+
     /***
      * 新增EnvironmentAlert数据
      * @param environmentAlert
      * @return
      */
     @ApiOperation("EnvironmentAlert添加")
-    @PostMapping
+    @PostMapping("/add")
     public R add(@RequestBody  @ApiParam(name = "EnvironmentAlert对象",value = "传入JSON数据",required = true) EnvironmentAlert environmentAlert){
         //调用EnvironmentAlertService实现添加EnvironmentAlert
         return R.ok(environmentAlertService.save(environmentAlert));

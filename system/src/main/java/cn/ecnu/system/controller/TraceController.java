@@ -103,9 +103,13 @@ public class TraceController {
     @ApiOperation(value = "Trace根据ID查询")
     @ApiImplicitParam(paramType = "path", name = "id", value = "主键ID", required = true, dataType = "")
     @GetMapping("/{id}")
-    public R<Trace> findById(@PathVariable Long id) {
+    public R findById(@PathVariable Long id) {
         //调用TraceService实现根据主键查询Trace
-        return R.ok(traceService.getById(id));
+        TraceAndProduceVO vo = traceService.selectTraceMapById(id);
+        if (vo == null) {
+            return R.error("查无数据~");
+        }
+        return R.ok(vo);
     }
 
     /***
@@ -114,9 +118,13 @@ public class TraceController {
      */
     @ApiOperation("查询所有Trace")
     @GetMapping("/findAll")
-    public R<List<TraceAndProduceVO>> findAll() {
+    public R findAll() {
         // 调用TraceService实现查询所有Trace
-        return R.ok(traceService.selectTraceMap());
+        List<TraceAndProduceVO> vos = traceService.selectTraceMap();
+        if (vos == null) {
+            return R.error("查无数据~");
+        }
+        return R.ok(vos);
     }
 
     @ApiOperation("根据时间间隔查找")
