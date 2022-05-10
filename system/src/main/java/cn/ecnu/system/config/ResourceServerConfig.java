@@ -87,7 +87,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/trace/**").permitAll()
                 .antMatchers("/index.html").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("/*.").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

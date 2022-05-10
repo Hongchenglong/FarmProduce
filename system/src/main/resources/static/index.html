@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<title>test</title>
+	<link rel="icon" href="http://static.lqjai.com/qjmall/img/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="http://static.lqjai.com/qjmall/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="http://static.lqjai.com/qjmall/css/pages-login.css" />
+	<link rel="stylesheet" type="text/css" href="http://static.lqjai.com/qjmall/plugins/elementui/index.css" />
+	<style>
+		.otherlogin img{
+			width: 35px;
+			height: 35px;
+		}
+		.otherlogin ul li{
+			width: 40px;
+			height: 70px;
+			float: left;
+		}
+		.tab-content.tab-wraped {
+			border: 1px solid #ddd;
+			border-top: 0;
+			padding: 18px;
+			height: 280px;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- 头部栏位 -->
+	<!--页面顶部-->
+	<div id="header"></div>
+
+	<div class="login-box">
+		<!--loginArea-->
+		<div class="loginArea">
+			<div class="py-container login">
+				<div class="loginform">
+					<ul class="sui-nav nav-tabs tab-wraped">
+						<li id="tabOtherLogin" onclick="switchOtherLogin()">
+							<a href="javascript:void(0)" data-toggle="tab" >
+								<h3>扫码登录</h3>
+							</a>
+						</li>
+						<li id="tabSuiForm" class="active" onclick="switchSuiForm()">
+							<a href="javascript:void(0)" data-toggle="tab" >
+								<h3>账户登录</h3>
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content tab-wraped">
+						<div id="index" class="tab-pane ">
+							<p>开发者认证费用有点小贵，扫码登录以后再开发。现在支持短信快速登录。短信余额有限，暂时没做安全验证，别调皮写脚本把我验证码发完了</p>
+							<img src="http://homepage.lqjai.com/img/qrcode.jpg" width="200px"/>
+						</div>
+						<div id="profile" class="tab-pane active">
+							<form class="sui-form">
+								<div class="input-prepend"><span class="add-on loginname"></span>
+									<input id="inputName" name="username" v-model="username" type="text" placeholder="邮箱/用户名/手机号" class="span2 input-xfat">
+								</div>
+								<div class="input-prepend"><span class="add-on loginpwd"></span>
+									<input id="inputPassword" name="password" v-model="password" type="password" placeholder="请输入密码" class="span2 input-xfat">
+								</div>
+								<div class="setting">
+									<label class="checkbox inline">
+										<input name="m1" type="checkbox" value="2" checked="">
+										自动登录
+									</label>
+									<span class="forget">忘记密码？</span>
+								</div>
+								<div class="logined">
+									<div style="text-align: center; color: red">{{msg}}</div>
+									<button @click="login()" type="button" class="sui-btn btn-block btn-xlarge btn-danger">登&nbsp;&nbsp;录</button>
+									<button @click="test()" type="button" class="sui-btn btn-block btn-xlarge btn-danger">测&nbsp;&nbsp;试</button>
+								</div>
+							</form>
+							<div class="otherlogin">
+								<div class="types">
+									<ul>
+										<li><a href="/mobile-login.html" target="_blank"><img src="http://static.lqjai.com/qjmall/img/mobile.png"/> 短信验证登录 </a></li>
+										<li> <a href="#none" @click="latterDev()"><img src="http://static.lqjai.com/qjmall/img/weixin.png"/> 微信扫码登录 </a></li>
+										<li><a href="#none" @click="latterAI()"><img src="http://static.lqjai.com/qjmall/img/eca68dedaf58d10864c4d28f8319fcb1.png"/>人脸识别登录</a> </li>
+										<li><img src="http://static.lqjai.com/qjmall/img/sina.png" /></li>
+										<li><img src="http://static.lqjai.com/qjmall/img/ali.png" /></li>
+									</ul>
+								</div>
+								<span class="register"><a href="/register.html" target="_blank">立即注册</a></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--页面底部-->
+	<div id="footer"></div>
+	<!--页面底部END-->
+
+	<script src="http://static.lqjai.com/qjmall/js/vue.js"></script>
+	<script src="http://static.lqjai.com/qjmall/js/axios.js"></script>
+	<script src="http://static.lqjai.com/qjmall/js/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="http://static.lqjai.com/qjmall/plugins/elementui/index.js"></script>
+	<script type="text/javascript">
+		function switchSuiForm() {
+			document.getElementById('index').className = "tab-pane";
+			document.getElementById('profile').className = "tab-pane active";
+			document.getElementById('tabSuiForm').className = "active";
+			document.getElementById('tabOtherLogin').className = "";
+		}
+		function switchOtherLogin() {
+			document.getElementById('index').className = "tab-pane active";
+			document.getElementById('profile').className = "tab-pane";
+			document.getElementById('tabSuiForm').className = "";
+			document.getElementById('tabOtherLogin').className = "active";
+		}
+	</script>
+<script>
+	$("#header").load("/header.html");
+	$("#footer").load("/footer.html");
+
+	var app = new Vue({
+		el: '#profile',
+		data: {
+		   msg: '',   		// 提示信息
+			username: '',	// 用户名
+			password: '',	// 密码
+            ReturnUrl: ""
+		},
+		methods: {
+		    login: function () {
+				// 登录
+				app.msg = '正在登录。。。。';
+					axios.post('/oauth/login?username=' + app.username + '&password=' + app.password).then(function (response) {
+					// axios.post('http://localhost:18088/user/login?username=' + app.username + '&password=' + app.password).then(function (response) {
+                        app.msg = '正在登录...';
+					    if (response.data.flag){
+					    // 登录成功
+						app.msg = '登录成功，3秒后跳转...';
+						// 3秒后跳转
+						setTimeout(function () {
+							if(app.ReturnUrl != null){
+								// 跳转到之前连接的地址
+								// location.assign(app.ReturnUrl);
+								location.href = app.ReturnUrl;
+							}else {
+								location.href = "http://qjmall.lqjai.com";
+							}
+
+                        },3000)
+					} else {
+                            app.msg = response.data.message;
+					}
+				})
+            },
+			test(){
+		    	axios.put("http://trace.lqjai.cn/alert/1").then((res)=>{
+
+				})
+			},
+			getUrlParam: function(name) {
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r!=null)return  unescape(r[2]); return null;
+			},
+			latterDev:function (){
+		    	app.$message("微信认证费用有点贵，有钱了再开通扫码登录");
+			},
+			latterAI:function (){
+		    	app.$message("AI还在学习中，后续开发");
+			}
+		},
+		created:function (){
+			this.ReturnUrl = this.getUrlParam("ReturnUrl");
+		}
+	});
+</script>
+</body>
+</html>
