@@ -1,5 +1,6 @@
 package cn.ecnu.system.controller;
 
+import cn.ecnu.common.utils.DateUtil;
 import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.common.utils.R;
 import cn.ecnu.system.pojo.EnvironmentAlert;
@@ -11,6 +12,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -135,15 +139,15 @@ public class EnvironmentAlertController {
             int rowNum = 4;
             for(EnvironmentAlert item: alertList){
                 XSSFRow row = sheet.getRow(rowNum++);
-                row.getCell(2).setCellValue(item.getProject());//日期
-                row.getCell(3).setCellValue(item.getCompany());//大棚id
-                row.getCell(4).setCellValue(item.getIntroduce());//空气温度
-                row.getCell(5).setCellValue(item.getRate());//空气湿度
-                row.getCell(6).setCellValue(item.getAmount());//CO2浓度
-                row.getCell(6).setCellValue(item.getAmount());//光照度
-                row.getCell(7).setCellValue(item.getAmount());//土壤温度
-                row.getCell(8).setCellValue(item.getAmount());//土壤湿度
-                row.getCell(9).setCellValue(item.getAmount());//是否已处理
+                row.getCell(2).setCellValue(DateUtil.ldt2Four(item.getCreateTime()));//日期
+                row.getCell(3).setCellValue(item.getId());//大棚id
+                row.getCell(4).setCellValue(item.getAirTemperature().doubleValue());//空气温度
+                row.getCell(5).setCellValue(item.getAirHumidity().doubleValue());//空气湿度
+                row.getCell(6).setCellValue(item.getCo2().doubleValue());//CO2浓度
+                row.getCell(6).setCellValue(item.getIlluminance().doubleValue());//光照度
+                row.getCell(7).setCellValue(item.getSoilTemperature().doubleValue());//土壤温度
+                row.getCell(8).setCellValue(item.getSoilHumidity().doubleValue());//土壤湿度
+                row.getCell(9).setCellValue(item.getHandled());//是否已处理
             }
 
             //使用输出流进行表格下载,基于浏览器作为客户端下载
@@ -158,8 +162,8 @@ public class EnvironmentAlertController {
             excel.close();
             return null;
         } catch (Exception e) {
-            log.info("\n###### 数据解析异常", e);
-            return R.error("数据解析异常");
+            log.info("\n###### 告警导入出错", e);
+            return R.error("告警导入出错");
         }
     }
 
