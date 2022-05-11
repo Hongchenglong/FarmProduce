@@ -41,7 +41,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         if (URLFilter.hasAuthorization(url)) {
             return chain.filter(exchange);
         }
-        if("/api".equals(request.getURI().getPath()) || "/api/".equals(request.getURI().getPath())) return chain.filter(exchange);
+//        if("/wf".equals(request.getURI().getPath()) || "/wf/".equals(request.getURI().getPath())) return chain.filter(exchange);
 
         //4. 获取请求头token
         String token = request.getHeaders().getFirst(AUTHORIZE_TOKEN);

@@ -85,6 +85,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/assets/**").permitAll()
                 .antMatchers("/webfonts/**").permitAll()
                 .antMatchers("/trace/**").permitAll()
+                .antMatchers("/alert/exportReport").permitAll()
                 .antMatchers("/index.html").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
                 .anyRequest().authenticated()

@@ -140,20 +140,20 @@ public class EnvironmentAlertController {
             for(EnvironmentAlert item: alertList){
                 XSSFRow row = sheet.getRow(rowNum++);
                 row.getCell(2).setCellValue(DateUtil.ldt2Four(item.getCreateTime()));//日期
-                row.getCell(3).setCellValue(item.getId());//大棚id
+                row.getCell(3).setCellValue(item.getGreenhouseId().toString());//大棚id
                 row.getCell(4).setCellValue(item.getAirTemperature().doubleValue());//空气温度
                 row.getCell(5).setCellValue(item.getAirHumidity().doubleValue());//空气湿度
                 row.getCell(6).setCellValue(item.getCo2().doubleValue());//CO2浓度
-                row.getCell(6).setCellValue(item.getIlluminance().doubleValue());//光照度
-                row.getCell(7).setCellValue(item.getSoilTemperature().doubleValue());//土壤温度
-                row.getCell(8).setCellValue(item.getSoilHumidity().doubleValue());//土壤湿度
-                row.getCell(9).setCellValue(item.getHandled());//是否已处理
+                row.getCell(7).setCellValue(item.getIlluminance().doubleValue());//光照度
+                row.getCell(8).setCellValue(item.getSoilTemperature().doubleValue());//土壤温度
+                row.getCell(9).setCellValue(item.getSoilHumidity().doubleValue());//土壤湿度
+                row.getCell(10).setCellValue(item.getHandled());//是否已处理
             }
 
             //使用输出流进行表格下载,基于浏览器作为客户端下载
             OutputStream out = response.getOutputStream();
             response.setContentType("application/vnd.ms-excel");//代表的是Excel文件类型
-            String fileName = "智慧农场环境阈值告警.xlsx";
+            String fileName = "%E6%99%BA%E6%85%A7%E5%86%9C%E5%9C%BA%E7%8E%AF%E5%A2%83%E9%98%88%E5%80%BC%E5%91%8A%E8%AD%A6.xlsx";
             response.setHeader("content-Disposition", "attachment;filename="+ fileName);//指定以附件形式进行下载
             excel.write(out);
 

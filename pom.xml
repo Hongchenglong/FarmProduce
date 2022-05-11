@@ -19,7 +19,7 @@
     </parent>
     <groupId>cn.ecnu.ncpsy</groupId>
     <artifactId>FarmProduce</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>FarmProduce</name>
     <description>高级Web课程设计-农场品溯源系统</description>
     <properties>
