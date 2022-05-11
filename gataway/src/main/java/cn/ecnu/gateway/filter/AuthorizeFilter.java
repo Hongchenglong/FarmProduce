@@ -57,7 +57,9 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
                 log.info("\n###### 从cookie中获取token,存入请求头中");
 
             }else {
-                throw ServiceExceptionUtil.exception(new ErrorCode(2022520, HttpStatus.UNAUTHORIZED.getReasonPhrase()));
+                //如果token为空，且不是溯源开放的接口，非法访问
+                if( !url.startsWith("/api/trace"))
+                    throw ServiceExceptionUtil.exception(new ErrorCode(2022520, HttpStatus.UNAUTHORIZED.getReasonPhrase()));
             }
         }else {
             if(!token.startsWith("bearer ") && !token.startsWith("Bearer "))

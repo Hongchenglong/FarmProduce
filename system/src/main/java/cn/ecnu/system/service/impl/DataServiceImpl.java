@@ -121,8 +121,8 @@ public class DataServiceImpl implements DataService {
             }else alert.setSoilTemperature(new BigDecimal(0));
             if(soilHumidity > threshold.getSoilHumidMax().doubleValue() || soilHumidity < threshold.getSoilHumidMin().doubleValue()) {
                 flag = true;//超出阈值
-                alert.setSoilTemperature(new BigDecimal( soilHumidity - threshold.getSoilHumidMin().doubleValue() < 0 ? (soilHumidity - threshold.getSoilHumidMin().doubleValue()) : (soilHumidity - threshold.getSoilHumidMax().doubleValue())));
-            }else alert.setSoilTemperature(new BigDecimal(0));
+                alert.setSoilHumidity(new BigDecimal( soilHumidity - threshold.getSoilHumidMin().doubleValue() < 0 ? (soilHumidity - threshold.getSoilHumidMin().doubleValue()) : (soilHumidity - threshold.getSoilHumidMax().doubleValue())));
+            }else alert.setSoilHumidity(new BigDecimal(0));
         }
 
         environment.setAirTemperature(new BigDecimal(airTemperature))
@@ -131,7 +131,7 @@ public class DataServiceImpl implements DataService {
                 .setIlluminance(new BigDecimal(illuminance))
                 .setSoilTemperature(new BigDecimal(soilTemperature))
                 .setSoilHumidity(new BigDecimal(soilHumidity)).setUpdateTime(LocalDateTime.now());
-        if(flag) alertService.save(alert.setTime(LocalDateTime.now()));
+        if(flag) alertService.save(alert.setTime(LocalDateTime.now()).setGreenhouseId(environment.getGreenhouseId()));
         return environment;
     }
 

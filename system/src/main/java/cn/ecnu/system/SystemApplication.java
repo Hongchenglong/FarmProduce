@@ -38,16 +38,16 @@ public class SystemApplication {
         return new IdWorker(1, 1);
     }
 
-//    Json Id序列化
-//    @Bean
-//    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-//        Jackson2ObjectMapperBuilderCustomizer cunstomizer = new Jackson2ObjectMapperBuilderCustomizer() {
-//            @Override
-//            public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
-//                jacksonObjectMapperBuilder.serializerByType(Long.TYPE, ToStringSerializer.instance);
-//                jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance);
-//            }
-//        };
-//        return cunstomizer;
-//    }
+    //Json Id序列化
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+        Jackson2ObjectMapperBuilderCustomizer cunstomizer = new Jackson2ObjectMapperBuilderCustomizer() {
+            @Override
+            public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
+                jacksonObjectMapperBuilder.serializerByType(Long.TYPE, ToStringSerializer.instance);
+                jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance);
+            }
+        };
+        return cunstomizer;
+    }
 }

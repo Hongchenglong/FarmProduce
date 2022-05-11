@@ -51,8 +51,8 @@ public class EnvironmentTask {
     }
 
 
-    //每隔5分钟更新一次
-    @Scheduled(cron = "0 0/5 * * * ?")
+    //每隔12小时更新一次
+    @Scheduled(cron = "0 0 0/12 * * ?")
     //每隔30秒实时更新大棚环境指标
 //    @Scheduled(cron = "0/30 * * * * ?")
     public void synEnv(){
