@@ -5,6 +5,7 @@ import cn.ecnu.common.utils.R;
 import cn.ecnu.system.pojo.EnvironmentAlert;
 import cn.ecnu.system.service.EnvironmentAlertService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -81,9 +82,9 @@ public class EnvironmentAlertController {
 
     @ApiOperation("批量处理")
     @PostMapping("/batchUpdate")
-    public R batchUpdate(@RequestBody Long[] ids) {
-        for (Long id : ids) {
-            environmentAlertService.updateById(new EnvironmentAlert().setId(id).setHandled(1));
+    public R batchUpdate(@RequestBody String[] ids) {
+        for (String id : ids) {
+            environmentAlertService.updateById(new EnvironmentAlert().setId(new Long(id)).setHandled(1));
         }
         return R.ok();
     }
