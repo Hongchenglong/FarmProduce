@@ -1,6 +1,5 @@
 package cn.ecnu.system.task;
 
-import cn.ecnu.system.model.vo.EnvironmentVO;
 import cn.ecnu.system.pojo.Environment;
 import cn.ecnu.system.pojo.EnvironmentAlert;
 import cn.ecnu.system.pojo.EnvironmentItem;

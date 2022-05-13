@@ -1,5 +1,7 @@
 package cn.ecnu.system.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -28,6 +30,7 @@ import java.time.LocalDateTime;
 public class EnvironmentAlert implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	@JSONField(serializeUsing = ToStringSerializer.class)
 	@ApiModelProperty(value = "主键id",required = true)
 	@TableId(type = IdType.AUTO)
 	private Long id;	//主键id
