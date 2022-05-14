@@ -41,6 +41,10 @@ spring:
             - Path=/api/**
           filters:
             - StripPrefix=1
+        - id: web
+          uri: lb://web
+          predicates:
+            - Path=/assets/src/**
 #            - name: RequestRateLimiter #一秒10次请求
 #              args:
 #                key-resolver: "#{@ipKeyResolver}"
