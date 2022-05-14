@@ -62,7 +62,7 @@ public class EnvironmentAlertController {
     @ApiOperation("EnvironmentAlert分页查询")
     @GetMapping("/search/{pageNo}/{size}" )
     public R<PageResult> findPage(@PathVariable  int pageNo, @PathVariable  int size){
-        return R.ok( environmentAlertService.findPage(pageNo, size));
+        return R.ok( environmentAlertService.findPage(new EnvironmentAlert().setHandled(0),pageNo, size));
     }
 
     /***
