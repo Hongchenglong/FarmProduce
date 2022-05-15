@@ -1,6 +1,8 @@
 package cn.ecnu.system.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ public class EnvironmentThreshold implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "",required = false)
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;	//
 
 	@ApiModelProperty(value = "",required = false)
