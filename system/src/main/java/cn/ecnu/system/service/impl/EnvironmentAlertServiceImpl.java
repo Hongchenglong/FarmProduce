@@ -41,7 +41,7 @@ public class EnvironmentAlertServiceImpl extends ServiceImpl<EnvironmentAlertMap
     @Override
     public PageResult findPage(int pageNo, int size){
         Page<EnvironmentAlert> page = new Page<>();
-        LambdaQueryWrapper<EnvironmentAlert> wrapper = Wrappers.<EnvironmentAlert>lambdaQuery().eq(EnvironmentAlert::getHandled, 0).orderByDesc(EnvironmentAlert::getCreateTime);//根据某个字段排序，自己根据实际情况小改一下
+        LambdaQueryWrapper<EnvironmentAlert> wrapper = Wrappers.<EnvironmentAlert>lambdaQuery().orderByDesc(EnvironmentAlert::getCreateTime);//根据某个字段排序，自己根据实际情况小改一下
         page.setCurrent(pageNo).setSize(size);
         IPage result = this.page(page, wrapper);
         PageResult pageResult=new PageResult(result.getTotal(),result.getRecords());

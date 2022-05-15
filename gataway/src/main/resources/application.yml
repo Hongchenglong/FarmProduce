@@ -41,6 +41,12 @@ spring:
             - Path=/api/**
           filters:
             - StripPrefix=1
+        - id: system
+          uri: lb://system
+          predicates:
+            - Path=/wf/api/**
+          filters:
+            - StripPrefix=2
         - id: web
           uri: lb://web
           predicates:

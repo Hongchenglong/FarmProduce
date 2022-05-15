@@ -62,7 +62,7 @@ public class EnvironmentAlertController {
     @ApiOperation("EnvironmentAlert分页查询")
     @GetMapping("/search/{pageNo}/{size}" )
     public R<PageResult> findPage(@PathVariable  int pageNo, @PathVariable  int size){
-        return R.ok( environmentAlertService.findPage(pageNo, size));
+        return R.ok( environmentAlertService.findPage(new EnvironmentAlert().setHandled(0),pageNo, size));
     }
 
     /***
@@ -125,7 +125,7 @@ public class EnvironmentAlertController {
 
     @GetMapping("exportReport")
     public R exportReport(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        List<EnvironmentAlert> alertList = environmentAlertService.findPage(1, 50).getRows();
+        List<EnvironmentAlert> alertList = environmentAlertService.findPage(1, 100).getRows();
         try {
 
             //获得虚拟目录下的"template"文件夹下的文件绝对路径
