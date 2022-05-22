@@ -1,25 +1,12 @@
-package ${package_pojo};
-<#if swagger==true>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-</#if>
-import javax.persistence.*;
-import com.baomidou.mybatisplus.annotation.TableId;
+package $
+
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import java.io.Serializable;
-<#list models as model>
-	<#if model.simpleType=='LocalDateTime'>
-import java.time.LocalDateTime;
-	</#if>
-	<#if model.identity=='YES'>
-import com.baomidou.mybatisplus.annotation.IdType;
-	</#if>
-	<#if model.tablelogic==true>
-import com.baomidou.mybatisplus.annotation.TableLogic;
+
+import javax.persistence.*;
 	</#if>
 </#list>
 

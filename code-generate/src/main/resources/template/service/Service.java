@@ -1,11 +1,4 @@
-package ${package_service};
-
-import ${package_pojo}.${Table};
-import cn.ecnu.common.utils.PageResult;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import java.util.List;
-import org.apache.ibatis.annotations.Select;
+package $
 
 /****
  * @Author: ${author}

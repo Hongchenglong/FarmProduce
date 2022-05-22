@@ -1,7 +1,6 @@
 package cn.ecnu.common.utils;
 
 import org.apache.commons.lang.StringUtils;
-import org.mapstruct.Named;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

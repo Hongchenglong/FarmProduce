@@ -12,7 +12,6 @@ import cn.ecnu.system.pojo.Greenhouse;
 import cn.ecnu.system.service.DataService;
 import cn.ecnu.system.service.EnvironmentService;
 import cn.ecnu.system.service.GreenhouseService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

@@ -1,11 +1,11 @@
-package ${package_feign};
+package $
 
+import $;
 import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.common.utils.R;
-import ${package_pojo}.${Table};
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /****

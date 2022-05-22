@@ -1,9 +1,9 @@
 package cn.ecnu.common.exception.utils;
 
 import cn.ecnu.common.constant.CommonConstants;
-import cn.ecnu.common.shop.ShopContextHolder;
 import cn.ecnu.common.exception.ErrorCode;
 import cn.ecnu.common.exception.ServiceException;
+import cn.ecnu.common.shop.ShopContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;

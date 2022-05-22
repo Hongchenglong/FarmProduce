@@ -7,13 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gataway" />
         <module name="system" />
         <module name="common" />
         <module name="code-generate" />
         <module name="oauth2" />
         <module name="Eureka" />
         <module name="farm-web" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,7 +27,7 @@
       <module name="code-generate" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="farm-web" options="-parameters" />
-      <module name="gataway" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="oauth" options="-parameters" />
       <module name="oauth2" options="-parameters" />
       <module name="system" options="-parameters" />

@@ -1,10 +1,7 @@
 package cn.ecnu.oauth.service;
 
-import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.oauth.pojo.Enterprise;
 import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
 
 /****
  * @Author: Kili
