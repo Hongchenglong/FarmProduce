@@ -1,12 +1,4 @@
-package ${package_mapper};
-
-import ${package_mapper}.${Table}Mapper;
-import ${package_pojo}.${Table};
-import ${package_service}.${Table}Service;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
-import java.util.List;
+package $
 
 /****
  * @Author: ${author}

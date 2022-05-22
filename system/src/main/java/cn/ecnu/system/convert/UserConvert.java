@@ -1,10 +1,7 @@
 package cn.ecnu.system.convert;
 
-import cn.ecnu.system.model.dto.EnvironmentDTO;
 import cn.ecnu.system.model.vo.EnterpriseVO;
-import cn.ecnu.system.model.vo.EnvironmentVO;
 import cn.ecnu.system.pojo.Enterprise;
-import cn.ecnu.system.pojo.Environment;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

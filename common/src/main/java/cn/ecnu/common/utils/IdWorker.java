@@ -1,8 +1,5 @@
 package cn.ecnu.common.utils;
 
-import lombok.Data;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.lang.management.ManagementFactory;

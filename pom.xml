@@ -8,7 +8,7 @@
         <module>eureka</module>
         <module>common</module>
         <module>code-generate</module>
-        <module>gataway</module>
+        <module>gateway</module>
         <module>oauth2</module>
         <module>farm-web</module>
     </modules>

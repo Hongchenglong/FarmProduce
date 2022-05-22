@@ -1,5 +1,7 @@
 package cn.ecnu.system.service.impl;
 
+import cn.ecnu.common.utils.BCrypt;
+import cn.ecnu.common.utils.JwtUtil;
 import cn.ecnu.common.utils.PageResult;
 import cn.ecnu.common.utils.R;
 import cn.ecnu.system.mapper.EnterpriseMapper;
@@ -12,8 +14,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.ecnu.common.utils.BCrypt;
-import cn.ecnu.common.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

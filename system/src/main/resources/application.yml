@@ -8,7 +8,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #navicat连接，记不住ip可以直接用域名，项目里面直接用ip加快访问
-    url: jdbc:mysql://139.224.164.169/traceap?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/traceap?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: tracer
     password: Aa111111
     hikari:

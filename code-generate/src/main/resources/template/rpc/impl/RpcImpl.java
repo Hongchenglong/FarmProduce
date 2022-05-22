@@ -1,19 +1,7 @@
-package ${package_rpc_impl};
+package $
 
-import ${package_mapper}.${Table}Mapper;
-import ${package_pojo}.${Table};
-import ${package_rpc}.${Table}Rpc;
-import ${package_service}.${Table}Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
-import cn.ecnu.common.utils.PageResult;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import java.util.List;
 
 /****
  * @Author: ${author}
